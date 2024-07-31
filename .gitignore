@@ -4,7 +4,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+src/main/resources/application.properties
+C:\codegym\module4\session\case_study\case_study\build.gradle
 ### STS ###
 .apt_generated
 .classpath
