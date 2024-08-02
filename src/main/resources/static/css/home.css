@@ -1,0 +1,38 @@
+.carousel-item img {
+    width: 100%;
+    height: 600px;
+}
+
+/*** testimonial Start ***/
+.testimonial .owl-nav .owl-prev {
+    position: absolute;
+    top: -58px;
+    right: 0;
+    color: #005599;
+    padding: 5px 25px;
+    border: 1px solid #ffc107;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.testimonial .owl-nav .owl-prev:hover {
+    background: #ffc107;
+    color: white;
+}
+
+.testimonial .owl-nav .owl-next {
+    position: absolute;
+    top: -58px;
+    right: 88px;
+    color: #005599;
+    padding: 5px 25px;
+    border: 1px solid #ffc107;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.testimonial .owl-nav .owl-next:hover {
+    background: #ffc107;
+    color: white;
+}
+/*** testimonial End ***/
