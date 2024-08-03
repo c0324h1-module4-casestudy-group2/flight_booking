@@ -1,0 +1,25 @@
+package com.group2.case_study.models;
+
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "roles",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "name") })
+@Data
+public class Role {
+
+    //    ROLE_ADMIN
+//    ROLE_USER
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Column(nullable = false, length = 50)
+    private String description;
+}
