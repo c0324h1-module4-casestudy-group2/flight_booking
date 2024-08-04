@@ -36,6 +36,7 @@
                 <p>Tổng tiền: <span id="total-price">0 VND</span></p>
                 <form id="booking-form" th:action="@{/flights/{flightId}/confirm-booking(flightId=${flightId})}" method="post">
                     <input type="hidden" name="seatIds" id="seat-ids">
+                    <input type="hidden" id="seat-price" th:value="${seatPrice}">
                     <button type="submit" class="btn btn-primary w-100 mt-3">Xác Nhận Đặt Chỗ</button>
                 </form>
             </div>

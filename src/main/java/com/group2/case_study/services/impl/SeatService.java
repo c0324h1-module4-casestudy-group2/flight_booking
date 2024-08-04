@@ -20,7 +20,6 @@ public class SeatService implements ISeatService {
     public List<List<Seat>> getSeatsGroupedByRows(Integer flightId) {
         List<Seat> seats = seatRepository.findSeatsByFlightId(flightId);
 
-        // Nhóm các ghế thành các hàng 6 ghế
         List<List<Seat>> seatRows = new ArrayList<>();
         for (int i = 0; i < seats.size(); i += 6) {
             seatRows.add(seats.subList(i, Math.min(i + 6, seats.size())));
