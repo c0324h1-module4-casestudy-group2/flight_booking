@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,7 +95,16 @@
     <div class="row">
         <div class="col-md-8">
             <div id="seat-map" class="text-center">
-                <!-- Ghế sẽ được tạo bằng JavaScript -->
+                <div class="seat-row" th:each="row : ${seatRows}">
+                    <div class="d-flex justify-content-center mb-2">
+                        <div class="seat" th:each="seat : ${row}"
+                             th:classappend="${seat.availabilityStatus == 'OCCUPIED' ? ' occupied' : ''}"
+                             th:text="${seat.seatNumber}"
+                             th:data-seat-id="${seat.seatId}"
+                             th:data-availability="${seat.availabilityStatus}"
+                             onclick="toggleSeat(this)"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -112,48 +121,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const seatMap = document.getElementById('seat-map');
-    const selectedCount = document.getElementById('selected-count');
-    const selectedSeats = document.getElementById('selected-seats');
-    const totalPrice = document.getElementById('total-price');
-    const rows = 10;
-    const seatsPerRow = 6;
-    const seatPrice = 500000; // 500,000 VND per seat
+    function toggleSeat(seatElement) {
+        const availability = seatElement.dataset.availability;
+        if (availability === 'OCCUPIED') return;
 
-    function createSeatMap() {
-        for (let i = 0; i < rows; i++) {
-            const row = document.createElement('div');
-            row.className = 'seat-row mb-2';
-            for (let j = 0; j < seatsPerRow; j++) {
-                const seat = document.createElement('div');
-                seat.className = 'seat';
-                seat.textContent = String.fromCharCode(65 + i) + (j + 1);
-                seat.addEventListener('click', toggleSeat);
-                if (Math.random() < 0.2) { // 20% chance for a seat to be occupied
-                    seat.classList.add('occupied');
-                }
-                row.appendChild(seat);
-                if (j === 2) row.appendChild(document.createElement('span').appendChild(document.createTextNode(' ')));
-            }
-            seatMap.appendChild(row);
-        }
-    }
-
-    function toggleSeat() {
-        if (this.classList.contains('occupied')) return;
-        this.classList.toggle('selected');
+        seatElement.classList.toggle('selected');
         updateSummary();
     }
 
     function updateSummary() {
         const selected = document.querySelectorAll('.seat.selected');
         const selectedCountValue = selected.length;
-        selectedCount.textContent = selectedCountValue;
-        selectedSeats.textContent = Array.from(selected).map(seat => seat.textContent).join(', ');
-        totalPrice.textContent = (selectedCountValue * seatPrice).toLocaleString('vi-VN') + ' VND';
-    }
+        const selectedSeats = Array.from(selected).map(seat => seat.textContent).join(', ');
+        const seatPrice = 500000; // Giá ghế
 
-    createSeatMap();
+        document.getElementById('selected-count').textContent = selectedCountValue;
+        document.getElementById('selected-seats').textContent = selectedSeats;
+        document.getElementById('total-price').textContent = (selectedCountValue * seatPrice).toLocaleString('vi-VN') + ' VND';
+    }
 </script>
 </body>
 </html>
