@@ -5,7 +5,9 @@ import com.group2.case_study.repositories.ISeatRepository;
 import com.group2.case_study.services.ISeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +27,13 @@ public class SeatService implements ISeatService {
         }
 
         return seatRows;
+    }
+
+    @Override
+    @Transactional
+    public void updateSeatStatus(List<Integer> seatIds, String status, LocalDateTime holdExpiration) {
+        for (Integer seatId : seatIds) {
+            seatRepository.updateSeatStatus(seatId, status, holdExpiration);
+        }
     }
 }
