@@ -3,15 +3,12 @@ package com.group2.case_study.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
-        @UniqueConstraint(name = "APP_USER_UK", columnNames = "username") })
+                @UniqueConstraint(name = "APP_USER_UK", columnNames = "username") })
 @Data
 public class User {
     @Id
@@ -44,4 +41,7 @@ public class User {
 
     @Column(length = 200)
     private String rememberToken;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserRole> roles;
 }
