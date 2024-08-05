@@ -5,14 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FlightController {
-    @GetMapping
-    public String list(){
-        return "flight/home";
-    }
 
-    @GetMapping("login")
-    public String login(){
-        return "login/login";
+    @GetMapping("/flight-login")
+    public String login() {
+        return "flight-login";
     }
-
 }
