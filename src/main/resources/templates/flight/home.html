@@ -43,7 +43,7 @@
 <div class="container mt-5" id="booking">
     <div class="booking-section w-75 mx-auto">
         <h2 class="text-center">Đặt Vé Máy Bay</h2>
-        <form>
+        <form action="#" th:action="@{/searchFlights}" method="post">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="departure" class="form-label">Điểm Khởi Hành</label>
@@ -56,6 +56,12 @@
                             <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>
                             <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>
                         </ul>
+                        <div class="mb-3">
+                            <label class="form-label" for="departureAirportId">Departure</label>
+                            <select name="departureAirportId" id="departureAirportId" class="form-select">
+                                <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -69,6 +75,12 @@
                             <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>
                             <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>
                         </ul>
+                        <div class="mb-3">
+                            <label class="form-label" for="arrivalAirportId">Arrival</label>
+                            <select name="arrivalAirportId" id="arrivalAirportId" class="form-select">
+                                <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
