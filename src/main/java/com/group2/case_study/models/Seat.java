@@ -27,6 +27,6 @@ public class Seat {
     @Column(nullable = false)
     private String availabilityStatus;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime holdExpiration;
 }

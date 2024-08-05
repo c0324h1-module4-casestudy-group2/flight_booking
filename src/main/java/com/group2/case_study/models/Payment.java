@@ -1,7 +1,8 @@
 package com.group2.case_study.models;
 
 import jakarta.persistence.*;
-import lombok.Data;;import java.math.BigDecimal;
+import lombok.Data;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
