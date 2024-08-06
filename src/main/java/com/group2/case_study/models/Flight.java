@@ -2,8 +2,8 @@ package com.group2.case_study.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table (name = "flights")

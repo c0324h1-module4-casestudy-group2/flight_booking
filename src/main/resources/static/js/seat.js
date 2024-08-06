@@ -15,7 +15,7 @@ function updateSummary() {
 }
 
 function toggleSeat(seatElement) {
-    if (seatElement.classList.contains('unavailable')) return;
+    if (seatElement.classList.contains('unavailable') || seatElement.classList.contains('hold')) return;
 
     seatElement.classList.toggle('selected');
     updateSummary();

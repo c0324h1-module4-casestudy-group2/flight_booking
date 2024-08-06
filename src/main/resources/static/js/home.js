@@ -38,3 +38,26 @@ document.getElementById('checkBookingForm').addEventListener('submit', function 
     document.getElementById('booking-info').classList.remove('hidden');
 });
 
+
+// Lấy nút cuộn
+const scrollToTopButton = document.getElementById('scrollToTop');
+
+// Hiển thị hoặc ẩn nút cuộn khi cuộn trang
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollToTopButton.style.display = 'flex';
+    } else {
+        scrollToTopButton.style.display = 'none';
+    }
+});
+
+// Cuộn trang lên đầu khi nhấn nút
+scrollToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+
+

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
+</head>
 <body class="bg-body-dark">
 <div th:replace="common/layout.html :: nav"></div>
 <div id="carouselExampleInterval" class="carousel slide carousel-fade pt-5" data-bs-ride="carousel">
@@ -43,32 +44,44 @@
 <div class="container mt-5" id="booking">
     <div class="booking-section w-75 mx-auto">
         <h2 class="text-center">Đặt Vé Máy Bay</h2>
-        <form>
+        <form action="#" th:action="@{/searchFlights}" method="post">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="departure" class="form-label">Điểm Khởi Hành</label>
-                    <div class="dropdown location-dropdown">
-                        <input type="text" class="form-control location-input dropdown-toggle" id="departure"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                               placeholder="Chọn điểm khởi hành">
-                        <ul class="dropdown-menu" aria-labelledby="departure">
-                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>
-                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>
-                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>
-                        </ul>
+<!--                    <label for="departure" class="form-label">Điểm Khởi Hành</label>-->
+<!--                    <div class="dropdown location-dropdown">-->
+<!--                        <input type="text" class="form-control location-input dropdown-toggle" id="departure"-->
+<!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+<!--                               placeholder="Chọn điểm khởi hành">-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="departure">-->
+<!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
+<!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
+<!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                    <div class="mb-3">
+                        <label class="form-label" for="departureAirportId">Điểm Khởi Hành</label>
+                        <select name="departureAirportId" id="departureAirportId" class="form-select">
+                            <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="destination" class="form-label">Điểm Đến</label>
-                    <div class="dropdown location-dropdown">
-                        <input type="text" class="form-control location-input dropdown-toggle" id="destination"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                               placeholder="Chọn điểm đến">
-                        <ul class="dropdown-menu" aria-labelledby="destination">
-                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>
-                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>
-                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>
-                        </ul>
+<!--                    <label for="destination" class="form-label">Điểm Đến</label>-->
+<!--                    <div class="dropdown location-dropdown">-->
+<!--                        <input type="text" class="form-control location-input dropdown-toggle" id="destination"-->
+<!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+<!--                               placeholder="Chọn điểm đến">-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="destination">-->
+<!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
+<!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
+<!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                    <div class="mb-3">
+                        <label class="form-label" for="arrivalAirportId">Điểm Đến</label>
+                        <select name="arrivalAirportId" id="arrivalAirportId" class="form-select">
+                            <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -77,14 +90,14 @@
                     <label for="departure-date" class="form-label">Ngày Khởi Hành</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input type="text" class="form-control date-flatpickr" id="departure-date" placeholder="Chọn ngày">
+                        <input th:value="${departureTime}" type="text" class="form-control date-flatpickr" id="departure-date" placeholder="Chọn ngày">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="return-date" class="form-label">Ngày Về</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input type="text" class="form-control date-flatpickr" id="return-date" placeholder="Chọn ngày">
+                        <input th:value="${arrivalTime}" type="text" class="form-control date-flatpickr" id="return-date" placeholder="Chọn ngày">
                     </div>
                 </div>
             </div>
@@ -235,7 +248,13 @@
 </div>
 <div class="row" id="hidden-flights"></div>
 <!-- Ảnh dưới cùng-->
-
+<div class="d-flex justify-content-center">
+<img src="/images/maybaytq.jpg" alt="" class="rounded-3">
+</div>
+<!-- Nút cuộn trang lên đầu -->
+<button id="scrollToTop" class="btn btn-primary">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
 <div th:replace="common/layout.html :: footer"></div>
 <script src="/js/home.js"></script>
 </body>

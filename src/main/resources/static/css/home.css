@@ -36,3 +36,32 @@
     color: white;
 }
 /*** testimonial End ***/
+
+/* Định dạng cho nút cuộn trang lên đầu */
+#scrollToTop {
+    position: fixed;
+    bottom: 20px; /* Khoảng cách từ dưới cùng */
+    right: 20px; /* Khoảng cách từ bên phải */
+    background-color: #007bff; /* Màu nền của nút */
+    color: white; /* Màu chữ */
+    border: none; /* Không có viền */
+    border-radius: 50%; /* Góc bo tròn */
+    width: 50px; /* Chiều rộng của nút */
+    height: 50px; /* Chiều cao của nút */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000; /* Đảm bảo nút hiển thị trên các phần tử khác */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#scrollToTop:hover {
+    background-color: #0056b3; /* Màu nền khi di chuột qua nút */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+#scrollToTop i {
+    font-size: 20px; /* Kích thước icon */
+}
