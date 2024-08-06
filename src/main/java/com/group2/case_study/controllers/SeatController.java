@@ -36,7 +36,7 @@ public class SeatController {
     @PostMapping("/{flightId}/confirm-booking")
     public String confirmBooking(@PathVariable Integer flightId, @RequestParam("seatIds") List<Integer> seatIds) {
         LocalDateTime holdExpiration = LocalDateTime.now().plusMinutes(1);
-        seatService.updateSeatStatus(seatIds, "UNAVAILABLE", holdExpiration);
+        seatService.updateSeatStatus(seatIds, "HOLD", holdExpiration);
         return "redirect:/flights/" + flightId + "/seats";
     }
 }

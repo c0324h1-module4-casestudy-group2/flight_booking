@@ -35,4 +35,9 @@ public class SeatService implements ISeatService {
             seatRepository.updateSeatStatus(seatId, status, holdExpiration);
         }
     }
+
+    @Override
+    public long countAvailableSeatsByFlightId(Integer flightId) {
+        return seatRepository.countAvailableSeatsByFlightId(flightId);
+    }
 }

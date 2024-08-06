@@ -12,4 +12,6 @@ public interface ISeatService {
     List<List<Seat>> getSeatsGroupedByRows(Integer flightId);
 
     void updateSeatStatus(List<Integer> seatIds, String status, LocalDateTime holdExpiration);
+
+    long countAvailableSeatsByFlightId(Integer flightId);
 }

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/flights.css">
 </head>
+<body>
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 text-center">
@@ -28,24 +29,15 @@
                 <h3 th:text="${arrivalAirport.airportName} + ' (' + ${arrivalAirport.airportCode} + ')'"></h3>
             </div>
         </div>
-<!--        <div class="col-md-6 text-end">-->
-<!--            <button class="btn btn-warning"><i class="fas fa-shopping-cart me-2"></i>Tổng: 0 VND</button>-->
-<!--        </div>-->
     </div>
     <div class="row mt-3">
         <div class="col-12">
-            <div class="date-selector d-flex justify-content-center mb-4">
-                <button type="button" class="btn btn-outline-primary">4 tháng 8</button>
-                <button type="button" class="btn btn-outline-primary">5 tháng 8</button>
-                <button type="button" class="btn btn-primary">6 tháng 8</button>
-                <button type="button" class="btn btn-outline-primary">7 tháng 8</button>
-            </div>
             <table class="table flight-table">
                 <thead>
                 <tr>
                     <td class="table-head">Chuyến Bay</td>
-                    <td class="table-head">Seat</td>
-                    <td class="table-head">Price</td>
+                    <td class="table-head">Trạng Thái</td>
+                    <td class="table-head">Giá</td>
                     <td class="table-head"></td>
                 </tr>
                 </thead>
@@ -54,28 +46,23 @@
                     <td>
                         <p th:text="${flight.airline}" class="flight-number"></p>
                         <p th:text="${#temporals.format(flight.departureTime, 'HH:mm')} + ' đến ' + ${#temporals.format(flight.arrivalTime, 'HH:mm')}" class="flight-time"></p>
-                        <p><span class="flight-details"><i class="fas fa-plane me-2"></i><span th:text=" 'Airbus ' + ${flight.flightNumber} + '- Bay thẳng'" class="flight-number"></span></span></p>
+                        <p><span class="flight-details"><i class="fas fa-plane me-2"></i><span th:text=" 'Airbus ' + ${flight.flightNumber} + '- Bay thẳng'" class="flight-number"></span></p>
                     </td>
-                    <td class="price business">Hết chỗ</td>
-                    <td th:text="${flight.price} + ' VND'" class="price skyboss"></td>
+                    <td class="price" th:text="${flight.seatCapacity == 0 ? 'Hết chỗ' : 'Còn chỗ'}"></td>
+                    <td th:text="${flight.price} + ' VND'" class="price"></td>
                     <td>
                         <div class="row mt-4">
                             <div class="col-12 text-end">
-<!--                                <button class="btn btn-primary"><i class="fas fa-arrow-right me-2"></i>Chọn</button>-->
-                                <a th:href="@{'/flights/' + ${flight.flightId} + '/seats'}" class="btn btn-primary">
+                                <a th:href="@{'/flights/' + ${flight.flightId} + '/seats'}" th:class="${flight.seatCapacity == 0 ? 'btn btn-secondary disabled' : 'btn btn-primary'}">
                                     <i class="fas fa-arrow-right me-2"></i>Chọn
                                 </a>
                             </div>
                         </div>
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
-<!--        <div class="row mt-4">-->
-<!--            <div class="col-12 text-end">-->
-<!--                <button class="btn btn-primary"><i class="fas fa-arrow-right me-2"></i>Chọn</button>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </div>
 </body>
