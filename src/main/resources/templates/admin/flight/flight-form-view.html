@@ -19,8 +19,12 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th>Mã chuyến bay</th>
+                    <th>Số chuyến bay</th>
                     <td th:text="${flight.flightNumber}"></td>
+                </tr>
+                <tr>
+                    <th>Hãng hàng không</th>
+                    <td th:text="${flight.airline}"></td>
                 </tr>
                 <tr>
                     <th>Sân bay khởi hành</th>
@@ -37,6 +41,14 @@
                 <tr>
                     <th>Thời gian đến</th>
                     <td th:text="${#temporals.format(flight.arrivalTime, 'dd/MM/yyyy HH:mm')}"></td>
+                </tr>
+                <tr>
+                    <th>Chỗ ngồi</th>
+                    <td th:text="${flight.seatCapacity}"></td>
+                </tr>
+                <tr>
+                    <th>Giá</th>
+                    <td th:text="${flight.price}"></td>
                 </tr>
                 </tbody>
             </table>

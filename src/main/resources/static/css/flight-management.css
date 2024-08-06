@@ -58,4 +58,9 @@ body {
 
 .table th, .table td {
     vertical-align: middle;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.table-responsive {
+    overflow-x: auto;
 }

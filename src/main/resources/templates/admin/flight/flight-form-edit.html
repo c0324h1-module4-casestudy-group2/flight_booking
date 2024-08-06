@@ -20,6 +20,10 @@
                     <input type="text" id="flightNumber" class="form-control" th:field="*{flightNumber}" required>
                 </div>
                 <div class="mb-3">
+                    <label for="airline" class="form-label">Hãng hàng không</label>
+                    <input type="text" id="airline" class="form-control" th:field="*{airline}" required>
+                </div>
+                <div class="mb-3">
                     <label for="departureAirport" class="form-label">Sân bay khởi hành</label>
                     <select id="departureAirport" class="form-select" th:field="*{departureAirport}" required>
                         <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
@@ -38,6 +42,14 @@
                 <div class="mb-3">
                     <label for="arrivalTime" class="form-label">Thời gian đến</label>
                     <input type="datetime-local" id="arrivalTime" class="form-control" th:field="*{arrivalTime}" value="${#temporals.format(flight.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm')}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="seatCapacity" class="form-label">Chỗ ngồi</label>
+                    <input type="text" id="seatCapacity" class="form-control" th:field="*{seatCapacity}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Giá</label>
+                    <input type="number" id="price" class="form-control" th:field="*{price}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Lưu</button>
                 <a href="/admin/flights" class="btn btn-secondary">Hủy</a>

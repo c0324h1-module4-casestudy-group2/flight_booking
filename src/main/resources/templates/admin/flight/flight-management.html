@@ -57,38 +57,46 @@
                 <div th:if="${message}" class="alert alert-success" role="alert">
                     <p th:text="${message}"></p>
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Số chuyến bay</th>
-                        <th>Sân bay khởi hành</th>
-                        <th>Sân bay đến</th>
-                        <th>Thời gian khởi hành</th>
-                        <th>Thời gian đến</th>
-                        <th>Hành động</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="flight : ${flights}">
-                        <td th:text="${flight.flightNumber}"></td>
-                        <td th:text="${flight.departureAirport.airportName}"></td>
-                        <td th:text="${flight.arrivalAirport.airportName}"></td>
-                        <td th:text="${#temporals.format(flight.departureTime, 'dd/MM/yyyy HH:mm')}"></td>
-                        <td th:text="${#temporals.format(flight.arrivalTime, 'dd/MM/yyyy HH:mm')}"></td>
-                        <td>
-                            <a th:href="@{/admin/flights/view/{id}(id=${flight.flightId})}" class="btn btn-info btn-sm">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a th:href="@{/admin/flights/edit/{id}(id=${flight.flightId})}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a th:href="@{/admin/flights/delete/{id}(id=${flight.flightId})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa chuyến bay này?');">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Số chuyến bay</th>
+                            <th>Hãng hàng không</th>
+                            <th>Sân bay khởi hành</th>
+                            <th>Sân bay đến</th>
+                            <th>Thời gian khởi hành</th>
+                            <th>Thời gian đến</th>
+                            <th>Chỗ ngồi</th>
+                            <th>Giá</th>
+                            <th>Hành động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="flight : ${flights}">
+                            <td th:text="${flight.flightNumber}"></td>
+                            <td th:text="${flight.airline}"></td>
+                            <td th:text="${flight.departureAirport.airportName}"></td>
+                            <td th:text="${flight.arrivalAirport.airportName}"></td>
+                            <td th:text="${#temporals.format(flight.departureTime, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td th:text="${#temporals.format(flight.arrivalTime, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td th:text="${flight.seatCapacity}"></td>
+                            <td th:text="${flight.price}"></td>
+                            <td>
+                                <a th:href="@{/admin/flights/view/{id}(id=${flight.flightId})}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a th:href="@{/admin/flights/edit/{id}(id=${flight.flightId})}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a th:href="@{/admin/flights/delete/{id}(id=${flight.flightId})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa chuyến bay này?');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
