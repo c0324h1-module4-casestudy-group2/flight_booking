@@ -7,4 +7,6 @@ import java.util.List;
 public interface IAirportService {
 
     List<Airport> findAll();
+
+    Airport findById(Long AirportId);
 }
