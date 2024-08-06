@@ -35,9 +35,14 @@ public class FlightService implements IFlightService {
         }
         return flights;
     }
-//
-//    @Override
-//    public List<Flight> findFlightDate(Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime) {
-//        return flightRepository.findByDepartureAirportIdAndArrivalAirportIdAndDepartureDateBetween(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
-//    }
+
+    @Override
+    public List<Flight> findFlightDate(Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime) {
+        List<Flight> flights = flightRepository.findFlightByAirportAndDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
+        for (Flight flight : flights) {
+            int availableSeats = (int) seatService.countAvailableSeatsByFlightId(flight.getFlightId());
+            flight.setSeatCapacity(availableSeats);
+        }
+        return flights;
+    }
 }
