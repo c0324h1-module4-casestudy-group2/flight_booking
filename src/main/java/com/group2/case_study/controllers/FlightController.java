@@ -34,14 +34,14 @@ public class FlightController {
 //        return "login/login";
 //    }
 
-    @GetMapping
+    @GetMapping("/home")
     public String showSearchForm(Model model) {
         Iterable<Airport> airports =  airportService.findAll();
         model.addAttribute("airports", airports);
         return "flight/home";
     }
 
-    @PostMapping("/searchFlights")
+    @PostMapping("/flights")
     public String searchFlights(@RequestParam("departureAirportId") Long departureAirportId,
                                 @RequestParam("arrivalAirportId") Long arrivalAirportId,
 //                                @RequestParam("departure-date") LocalDateTime departureTime,
