@@ -60,9 +60,7 @@ public class FlightController {
         if (!returnDateStr.isEmpty()) {
             arrivalTime = LocalDateTime.parse(returnDateStr, formatter);
         }
-
         List<Flight> flights;
-//        flights = flightService.findFlights(departureAirportId, arrivalAirportId);
         if (departureTime != null && arrivalTime != null) {
             flights = flightService.findFlightDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
         } else {
@@ -79,4 +77,6 @@ public class FlightController {
         model.addAttribute("arrivalAirport", arrivalAirport);
         return "flight/list";
     }
+
+
 }
