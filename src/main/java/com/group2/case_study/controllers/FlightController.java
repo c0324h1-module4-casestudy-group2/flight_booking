@@ -29,10 +29,10 @@ public class FlightController {
 //        return "flight/home";
 //    }
 
-    @GetMapping("login")
-    public String login(){
-        return "login/login";
-    }
+//    @GetMapping("login")
+//    public String login(){
+//        return "login/login";
+//    }
 
     @GetMapping
     public String showSearchForm(Model model) {
