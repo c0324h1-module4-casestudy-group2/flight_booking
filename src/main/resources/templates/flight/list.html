@@ -46,7 +46,7 @@
                     <td>
                         <p th:text="${flight.airline}" class="flight-number"></p>
                         <p th:text="${#temporals.format(flight.departureTime, 'HH:mm')} + ' đến ' + ${#temporals.format(flight.arrivalTime, 'HH:mm')}" class="flight-time"></p>
-                        <p><span class="flight-details"><i class="fas fa-plane me-2"></i><span th:text=" 'Airbus ' + ${flight.flightNumber} + '- Bay thẳng'" class="flight-number"></span></p>
+                        <p><span class="flight-details"><i class="fas fa-plane me-2"></i></span><span th:text=" 'Airbus ' + ${flight.flightNumber} + '- Bay thẳng'" class="flight-number"></span></p>
                     </td>
                     <td class="price" th:text="${flight.seatCapacity == 0 ? 'Hết chỗ' : 'Còn chỗ'}"></td>
                     <td th:text="${flight.price} + ' VND'" class="price"></td>

@@ -51,7 +51,7 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/flight/home", true)
+                                .defaultSuccessUrl("/home", true)
                 )
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
