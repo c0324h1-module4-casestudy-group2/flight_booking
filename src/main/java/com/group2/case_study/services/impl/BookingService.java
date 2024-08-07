@@ -6,6 +6,8 @@ import com.group2.case_study.services.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookingService implements IBookingService {
     @Autowired
@@ -23,5 +25,10 @@ public class BookingService implements IBookingService {
     @Override
     public Booking findByCode(String booked) {
         return bookingRepository.findBookingByCode(booked);
+    }
+
+    @Override
+    public List<Booking> getBookingHistoryByUserId(Integer userId) {
+        return bookingRepository.findAllByUserId(userId);
     }
 }
