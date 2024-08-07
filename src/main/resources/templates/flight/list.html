@@ -32,6 +32,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-12">
+            <div id="date-selector" class="date-selector d-flex justify-content-center mb-4"></div>
             <table class="table flight-table">
                 <thead>
                 <tr>
@@ -49,7 +50,7 @@
                         <p><span class="flight-details"><i class="fas fa-plane me-2"></i></span><span th:text=" 'Airbus ' + ${flight.flightNumber} + '- Bay thẳng'" class="flight-number"></span></p>
                     </td>
                     <td class="price" th:text="${flight.seatCapacity == 0 ? 'Hết chỗ' : 'Còn chỗ'}"></td>
-                    <td th:text="${flight.price} + ' VND'" class="price"></td>
+                    <td th:text="${#numbers.formatDecimal(flight.price, 0, 'COMMA', 0, 'POINT')} + ' VND'" class="price"></td>
                     <td>
                         <div class="row mt-4">
                             <div class="col-12 text-end">
@@ -65,5 +66,29 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date();
+        const days = [];
+
+        for (let i = 0; i < 7; i++) {
+            const day = new Date(today);
+            day.setDate(today.getDate() + i);
+            days.push(day);
+        }
+
+        const dateSelector = document.getElementById('date-selector');
+        days.forEach(day => {
+            const dayButton = document.createElement('button');
+            dayButton.type = 'button';
+            dayButton.className = `btn ${day.toDateString() === today.toDateString() ? 'btn-primary' : 'btn-outline-primary'}`;
+
+            const dayText = `${day.getDate().toString().padStart(2, '0')}-${(day.getMonth() + 1).toString().padStart(2, '0')}`;
+            dayButton.textContent = dayText;
+
+            dateSelector.appendChild(dayButton);
+        });
+    });
+</script>
 </body>
 </html>
