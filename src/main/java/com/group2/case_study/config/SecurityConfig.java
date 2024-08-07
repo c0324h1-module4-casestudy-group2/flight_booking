@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login", "/logoutSuccessful", "/register", "/css/**", "/js/**").permitAll()
+                                .requestMatchers("/login", "/logoutSuccessful", "/register","/ticket/**", "/css/**", "/js/**").permitAll()
                                 .requestMatchers("/student/create", "/logout").authenticated()
                                 .anyRequest().authenticated()
                 )
@@ -51,7 +51,7 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/flight/home", true)
+                                .defaultSuccessUrl("/home", true)
                 )
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
