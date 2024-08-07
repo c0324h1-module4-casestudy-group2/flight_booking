@@ -341,3 +341,8 @@ main {
 .today {
     border-color: #003366 !important;
 }
+
+.img-payment {
+    width: 320px;
+    height: auto;
+}

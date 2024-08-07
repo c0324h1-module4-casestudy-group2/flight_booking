@@ -4,17 +4,18 @@
     <title>Title</title>
     <th:block></th:block>
     <th:block th:replace="~{/common/layout :: head}"></th:block>
-    <link rel="stylesheet" href="/css/banner.css">
     <link rel="stylesheet" href="/css/flatpickr.css">
     <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="/css/home.css">
-</head>
+    <script src="/js/wow.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body class="bg-body-dark">
 <div th:replace="common/layout.html :: nav"></div>
 <div id="carouselExampleInterval" class="carousel slide carousel-fade pt-5" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="5000">
+        <div class="carousel-item active" data-bs-interval="10000">
             <img src="/images/banner1.jpg" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h1>Giá Vé Tốt Nhất</h1>
@@ -30,7 +31,7 @@
                 <a href="#booking" class="bookNowButton btn btn-warning mb-4">Đặt Vé Ngay</a>
             </div>
         </div>
-        <div class="carousel-item" data-bs-interval="5000">
+        <div class="carousel-item">
             <img src="/images/mb3.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h1>Khám Phá Thế Giới</h1>
@@ -41,106 +42,108 @@
     </div>
 </div>
 <!-- Đặt vé -->
-<div class="container mt-5" id="booking">
-    <div class="booking-section w-75 mx-auto">
-        <h2 class="text-center">Đặt Vé Máy Bay</h2>
-        <form action="#" th:action="@{/flights}" method="post">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-<!--                    <label for="departure" class="form-label">Điểm Khởi Hành</label>-->
-<!--                    <div class="dropdown location-dropdown">-->
-<!--                        <input type="text" class="form-control location-input dropdown-toggle" id="departure"-->
-<!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
-<!--                               placeholder="Chọn điểm khởi hành">-->
-<!--                        <ul class="dropdown-menu" aria-labelledby="departure">-->
-<!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
-<!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
-<!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-                    <div class="mb-3">
-                        <label class="form-label" for="departureAirportId">Điểm Khởi Hành</label>
-                        <select name="departureAirportId" id="departureAirportId" class="form-select">
-                            <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
-                        </select>
+<section class="wow fadeInUp" data-wow-duration="2s">
+    <div class="container mt-5 pt-5" id="booking">
+        <div class="booking-section w-75 mx-auto">
+            <h2 class="text-center">Đặt Vé Máy Bay</h2>
+            <form action="#" th:action="@{/flights}" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <!--                    <label for="departure" class="form-label">Điểm Khởi Hành</label>-->
+                        <!--                    <div class="dropdown location-dropdown">-->
+                        <!--                        <input type="text" class="form-control location-input dropdown-toggle" id="departure"-->
+                        <!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+                        <!--                               placeholder="Chọn điểm khởi hành">-->
+                        <!--                        <ul class="dropdown-menu" aria-labelledby="departure">-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
+                        <!--                        </ul>-->
+                        <!--                    </div>-->
+                        <div class="mb-3">
+                            <label class="form-label" for="departureAirportId">Điểm Khởi Hành</label>
+                            <select name="departureAirportId" id="departureAirportId" class="form-select">
+                                <option th:each="airport : ${airports}" th:value="${airport.airportId}"
+                                        th:text="${airport.airportName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <!--                    <label for="destination" class="form-label">Điểm Đến</label>-->
+                        <!--                    <div class="dropdown location-dropdown">-->
+                        <!--                        <input type="text" class="form-control location-input dropdown-toggle" id="destination"-->
+                        <!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+                        <!--                               placeholder="Chọn điểm đến">-->
+                        <!--                        <ul class="dropdown-menu" aria-labelledby="destination">-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
+                        <!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
+                        <!--                        </ul>-->
+                        <!--                    </div>-->
+                        <div class="mb-3">
+                            <label class="form-label" for="arrivalAirportId">Điểm Đến</label>
+                            <select name="arrivalAirportId" id="arrivalAirportId" class="form-select">
+                                <option th:each="airport : ${airports}" th:value="${airport.airportId}"
+                                        th:text="${airport.airportName}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-<!--                    <label for="destination" class="form-label">Điểm Đến</label>-->
-<!--                    <div class="dropdown location-dropdown">-->
-<!--                        <input type="text" class="form-control location-input dropdown-toggle" id="destination"-->
-<!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
-<!--                               placeholder="Chọn điểm đến">-->
-<!--                        <ul class="dropdown-menu" aria-labelledby="destination">-->
-<!--                            <li class="dropdown-item"><span class="city-code">HAN</span> Hà Nội</li>-->
-<!--                            <li class="dropdown-item"><span class="city-code">SGN</span> Hồ Chí Minh</li>-->
-<!--                            <li class="dropdown-item"><span class="city-code">DAD</span> Đà Nẵng</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-                    <div class="mb-3">
-                        <label class="form-label" for="arrivalAirportId">Điểm Đến</label>
-                        <select name="arrivalAirportId" id="arrivalAirportId" class="form-select">
-                            <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
-                        </select>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="departure-date" class="form-label">Ngày Khởi Hành</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+                            <input name="departure-date" th:value="${departureTime}" type="text"
+                                   class="form-control date-flatpickr" id="departure-date" placeholder="Chọn ngày">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="passengers" class="form-label">Số Lượng Hành Khách</label>
+                        <input type="number" class="form-control" id="passengers" min="1" max="10" value="1">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="departure-date" class="form-label">Ngày Khởi Hành</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input name="departure-date" th:value="${departureTime}" type="text" class="form-control date-flatpickr" id="departure-date" placeholder="Chọn ngày">
+
+                <div class="row justify-content-center mt-4">
+                    <div class="col-auto">
+                        <input type="hidden" name="userName" th:value="${username}"/>
+                        <button type="submit" class="btn btn-primary">Tìm Chuyến Bay</button>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label for="return-date" class="form-label">Ngày Về</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                        <input name="return-date" th:value="${arrivalTime}" type="text" class="form-control date-flatpickr" id="return-date" placeholder="Chọn ngày">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="passengers" class="form-label">Số Lượng Hành Khách</label>
-                    <input type="number" name="passengers" class="form-control" id="passengers" min="1" max="10" value="1">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="form-check form-switch mt-4">
-                        <input class="form-check-input" type="checkbox" id="round-trip">
-                        <label class="form-check-label" for="round-trip">Khứ Hồi</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <input type="hidden" name="userName" th:value="${username}"/>
-                    <button type="submit" class="btn btn-primary">Tìm Chuyến Bay</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+</section>
+
 <!-- Tra cứu vé đã đặt -->
-<div class="container my-5" id="check-booking">
-    <div class="booking-section w-75 mx-auto">
-        <h2>Tra Cứu Vé Đã Đặt</h2>
-        <form id="checkBookingForm" action="/booked">
-            <div class="mb-3">
-                <label for="booking-code" class="form-label">Mã Đặt Chỗ</label>
-                <input type="text" class="form-control" id="booking-code" placeholder="Nhập mã đặt chỗ" name="booked" required>
-            </div>
-            <button type="submit" class="btn btn-warning">Tra Cứu</button>
-        </form>
+<section class="wow fadeInUp" data-wow-duration="2s">
+    <div class="container my-5 pt-5" id="check-booking">
+        <div class="booking-section w-75 mx-auto">
+            <h2 class="text-center">Tra Cứu Vé Đã Đặt</h2>
+            <form id="checkBookingForm" action="/booked">
+                <div class="mb-3">
+                    <label for="booking-code" class="form-label">Mã Đặt Chỗ</label>
+                    <input type="text" class="form-control" id="booking-code" placeholder="Nhập mã đặt chỗ"
+                           name="booked" required>
+                </div>
+                <div class="d-flex justify-content-center col-auto mt-4">
+                        <button type="submit" class="btn btn-primary">Tra cứu</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</section>
+
 <!-- Danh sách chuyến bay -->
+
 <div class="container">
-    <h2 class="text-center pt-4">Các Chuyến Bay Đề Xuất</h2>
+    <section class="wow fadeInUp" data-wow-duration="2s">
+        <h2 class="text-center pt-4 fw-bold content-title pt-5">Các Chuyến Bay Đề Xuất</h2>
+    </section>
+
     <div class="row" id="flight-list">
         <!-- Chuyến bay đầu tiên -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -157,7 +160,7 @@
             </div>
         </main>
         <!-- Chuyến bay thứ hai -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -174,7 +177,7 @@
             </div>
         </main>
         <!-- Chuyến bay thứ ba -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -191,7 +194,7 @@
             </div>
         </main>
         <!-- Chuyến bay thứ tư -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -208,7 +211,7 @@
             </div>
         </main>
         <!-- Chuyến bay thứ năm -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -225,7 +228,7 @@
             </div>
         </main>
         <!-- Chuyến bay thứ sáu -->
-        <main class="col-md-4 mb-3">
+        <main class="col-md-4 mb-3 wow fadeInUp" data-wow-duration="2s">
             <div class="card">
                 <img src="/images/HN.jpg" alt="">
                 <div class="card-content">
@@ -243,32 +246,22 @@
         </main>
     </div>
 </div>
-<!-- Nút Xem Thêm -->
-<div class="text-center my-4">
-    <button id="show-more"  class="btn btn-warning">Xem Thêm</button>
-</div>
-<div class="row" id="hidden-flights"></div>
+
 <!-- Ảnh dưới cùng-->
-<div class="d-flex justify-content-center">
-<img src="/images/maybaytq.jpg" alt="" class="rounded-3">
-</div>
+<section class="wow fadeInUp" data-wow-duration="2s">
+    <div class="d-flex justify-content-center">
+        <img src="/images/maybaytq.jpg" alt="" class="rounded-3">
+    </div>
+</section>
+
 <!-- Nút cuộn trang lên đầu -->
 <button id="scrollToTop" class="btn btn-primary">
     <i class="fa-solid fa-arrow-up"></i>
 </button>
-<div th:replace="common/layout.html :: footer"></div>
-<script src="/js/home.js"></script>
+<section class="wow fadeInUp" data-wow-duration="2s">
+    <div th:replace="common/layout.html :: footer"></div>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr(".date-flatpickr", {
-        enableTime: true,
-        dateFormat: "Y-m-d\\TH:i:ss",
-        altInput: true,
-        altFormat: "d-m-Y H:i",
-        time_24hr: true,
-        minDate: "today"
-    });
-</script>
+<script src="/js/home.js"></script>
 </body>
 </html>
