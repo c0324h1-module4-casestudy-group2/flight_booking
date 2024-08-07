@@ -115,6 +115,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-auto">
+                    <input type="hidden" name="userName" th:value="${username}"/>
                     <button type="submit" class="btn btn-primary">Tìm Chuyến Bay</button>
                 </div>
             </div>
@@ -125,10 +126,10 @@
 <div class="container my-5" id="check-booking">
     <div class="booking-section w-75 mx-auto">
         <h2>Tra Cứu Vé Đã Đặt</h2>
-        <form id="checkBookingForm">
+        <form id="checkBookingForm" action="/booked">
             <div class="mb-3">
                 <label for="booking-code" class="form-label">Mã Đặt Chỗ</label>
-                <input type="text" class="form-control" id="booking-code" placeholder="Nhập mã đặt chỗ" required>
+                <input type="text" class="form-control" id="booking-code" placeholder="Nhập mã đặt chỗ" name="booked" required>
             </div>
             <button type="submit" class="btn btn-warning">Tra Cứu</button>
         </form>

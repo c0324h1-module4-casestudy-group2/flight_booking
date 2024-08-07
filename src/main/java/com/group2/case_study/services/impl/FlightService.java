@@ -55,4 +55,9 @@ public class FlightService implements IFlightService {
         }
         return flights;
     }
+
+    @Override
+    public Flight findById(int flightId) {
+        return flightRepository.findById(flightId).orElse(null);
+    }
 }

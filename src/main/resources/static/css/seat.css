@@ -9,6 +9,20 @@ body {
     justify-content: center;
 }
 
+.navbar {
+    background-color: #003366;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    top: 0;
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #ffc107 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
 .seat-selection-container {
     background-color: white;
     border-radius: 15px;
@@ -17,6 +31,10 @@ body {
     margin-top: 50px;
     max-width: 1000px;
     width: 100%;
+}
+
+.plane-header h2 {
+    color: #003366;
 }
 
 .seat {

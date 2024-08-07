@@ -2,6 +2,7 @@
     background-color: #003366;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
     padding: 0.5rem 1rem;
+    top: 0;
 }
 
 .navbar-brand {
@@ -10,11 +11,11 @@
     color: #ffc107 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .navbar-brand:hover {
     transform: scale(1.05);
-    /* Sửa giá trị transform */
 }
 
 .navbar-brand img {

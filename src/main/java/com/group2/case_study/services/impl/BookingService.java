@@ -12,6 +12,20 @@ import java.util.List;
 public class BookingService implements IBookingService {
     @Autowired
     private IBookingRepository bookingRepository;
+    @Override
+    public Booking findById(int flightId) {
+        return bookingRepository.findById(flightId).get();
+    }
+
+    @Override
+    public void save(Booking booking) {
+        bookingRepository.save(booking);
+    }
+
+    @Override
+    public Booking findByCode(String booked) {
+        return bookingRepository.findBookingByCode(booked);
+    }
 
     @Override
     public List<Booking> getBookingHistoryByUserId(Integer userId) {
