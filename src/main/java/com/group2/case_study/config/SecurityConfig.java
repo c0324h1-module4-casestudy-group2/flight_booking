@@ -1,3 +1,4 @@
+// File: com/group2/case_study/config/SecurityConfig.java
 package com.group2.case_study.config;
 
 import com.group2.case_study.services.impl.UserInforDetailService;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -41,7 +43,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login", "/logoutSuccessful", "/register", "/css/**", "/js/**").permitAll()
-                                .requestMatchers("/student/create", "/logout").authenticated()
+                                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "EMPLOYEE")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -51,7 +53,8 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/flight/home", true)
+                                .successHandler(customAuthenticationSuccessHandler())
+                                .permitAll()
                 )
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
@@ -60,5 +63,10 @@ public class SecurityConfig {
                                 .logoutSuccessUrl("/logoutSuccessful")
                 );
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 }

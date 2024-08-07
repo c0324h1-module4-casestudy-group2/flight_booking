@@ -29,7 +29,7 @@ public class Booking {
     private LocalDateTime bookingDate;
 
     @Column
-    private Integer numberOfSeats;
+    private String numberOfSeats;
 
     @Column
     private Double totalPrice;

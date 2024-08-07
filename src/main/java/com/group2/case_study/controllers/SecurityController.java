@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SecurityController {
 
+    @GetMapping("/admin")
+    public String adPage(Model model, @RequestParam(value = "error", defaultValue = "") String error) {
+        if (!error.isEmpty()) {
+            model.addAttribute("error", "Invalid username or password.");
+        }
+        return "admin/user-management";
+    }
+
     @GetMapping("/login")
     public String loginPage(Model model, @RequestParam(value = "error", defaultValue = "") String error) {
         if (!error.isEmpty()) {
@@ -15,6 +23,7 @@ public class SecurityController {
         }
         return "login/login";
     }
+
 
     @GetMapping("/logoutSuccessful")
     public String logoutSuccessfulPage(Model model) {
