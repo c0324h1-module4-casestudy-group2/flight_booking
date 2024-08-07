@@ -8,9 +8,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
+
     @Autowired
     private IUserRepository userRepository;
 
+    @Override
+    public User findByName(String userName) {
+        return userRepository.findByUsername(userName);
+    }
 
     @Override
     public User findUserByUsername(String username) {

@@ -28,6 +28,6 @@ public interface ISeatRepository extends JpaRepository<Seat, Integer> {
     @Query("UPDATE Seat s SET s.availabilityStatus = 'AVAILABLE', s.holdExpiration = NULL WHERE s.availabilityStatus = 'HOLD' AND s.holdExpiration < :now")
     void updateSeatsToAvailableIfExpired(LocalDateTime now);
 
-    @Query("SELECT COUNT(s) FROM Seat s WHERE s.flight.flightId = :flightId AND s.availabilityStatus = 'AVAILABLE'")
-    long countAvailableSeatsByFlightId(Integer flightId);
+        @Query("SELECT COUNT(s) FROM Seat s WHERE s.flight.flightId = :flightId AND s.availabilityStatus = 'AVAILABLE'")
+        long countAvailableSeatsByFlightId(Integer flightId);
 }
