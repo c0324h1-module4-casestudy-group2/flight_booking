@@ -19,7 +19,7 @@
     <div class="row mt-4">
         <div class="col-md-3">
             <div class="location-info">
-                <p><i class="fas fa-map-marker-alt me-2"></i>Điểm khởi hành</p>
+                <p><i class="fas fa-map-marker-alt me-2" id="departureAirportId"></i>Điểm khởi hành</p>
                 <h3 th:text="${departureAirport.airportName} + ' (' + ${departureAirport.airportCode} + ')'"></h3>
             </div>
         </div>
@@ -32,7 +32,13 @@
     </div>
     <div class="row mt-3">
         <div class="col-12">
-            <div id="date-selector" class="date-selector d-flex justify-content-center mb-4"></div>
+            <form id="search-form" action="/flightDate" method="post">
+                <input type="hidden" id="selected-date" name="selectedDate" />
+                <input type="hidden" name="departureAirportCode" th:value="${departureAirport.airportCode}" />
+                <input type="hidden" name="arrivalAirportCode" th:value="${arrivalAirport.airportCode}" />
+                <input type="hidden" name="passengers" th:value="${passengers}" />
+            </form>
+            <div id="date-selector1" class="date-selector d-flex justify-content-center mb-4"></div>
             <table class="table flight-table">
                 <thead>
                 <tr>
@@ -77,15 +83,18 @@
             days.push(day);
         }
 
-        const dateSelector = document.getElementById('date-selector');
+        const dateSelector = document.getElementById('date-selector1');
         days.forEach(day => {
             const dayButton = document.createElement('button');
             dayButton.type = 'button';
             dayButton.className = `btn ${day.toDateString() === today.toDateString() ? 'btn-primary' : 'btn-outline-primary'}`;
+            dayButton.dataset.date = day.toISOString().slice(0, -1);
+            dayButton.textContent = `${day.getDate().toString().padStart(2, '0')}-${(day.getMonth() + 1).toString().padStart(2, '0')}`;
 
-            const dayText = `${day.getDate().toString().padStart(2, '0')}-${(day.getMonth() + 1).toString().padStart(2, '0')}`;
-            dayButton.textContent = dayText;
-
+            dayButton.addEventListener('click', function() {
+                document.getElementById('selected-date').value = this.dataset.date;
+                document.getElementById('search-form').submit();
+            });
             dateSelector.appendChild(dayButton);
         });
     });
