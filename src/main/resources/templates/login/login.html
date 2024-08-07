@@ -9,15 +9,13 @@
 <body>
 <div class="wrapper">
     <nav class="nav">
-        <div class="nav-logo">
-            <p><img src="https://img.icons8.com/color/48/000000/airplane-mode-on.png" alt="SkyJourney Logo" width="40"
-                    height="40">
-                SkyJourney</p>
-        </div>
+        <a class="navbar-brand" href="/home">
+            SkyJourney
+        </a>
 
         <div class="nav-button">
-            <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
-            <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
+            <button class="btn white-btn" id="loginBtn" onclick="login()">Đăng Nhập</button>
+            <button class="btn" id="registerBtn" onclick="register()">Đăng Ký</button>
         </div>
         <div class="nav-menu-btn">
             <i class="bx bx-menu" onclick="myMenuFunction()"></i>
@@ -32,27 +30,27 @@
         <div class="login-container" id="login">
             <form name='f' action="/login" method='POST'>
                 <div class="top">
-                    <header>Login</header>
+                    <header>Đăng Nhập</header>
                 </div>
                 <div class="input-box">
-                    <input type="text" name="username" class="input-field" placeholder="Username or Email" required>
+                    <input type="text" name="username" class="input-field" placeholder="Tên đăng nhập" required>
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" class="input-field" placeholder="Password" required>
+                    <input type="password" name="password" class="input-field" placeholder="Mật khẩu" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
-                <div class="input-box">
-                    <input type="submit" class="submit" value="Sign In">
+                <div class="input-box-submit">
+                    <input type="submit" class="submit" value="Đăng Nhập">
                 </div>
                 <div class="two-col">
                     <div class="one">
                         <input type="checkbox" id="login-check">
-                        <label for="login-check"> Remember Me</label>
+                        <label for="login-check"> Ghi nhớ đăng nhập</label>
                     </div>
-                    <div class="two">
-                        <label><a href="#">Forgot password?</a></label>
-                    </div>
+<!--                    <div class="two">-->
+<!--                        <label><a href="#">Forgot password?</a></label>-->
+<!--                    </div>-->
                 </div>
             </form>
         </div>
@@ -61,15 +59,15 @@
         <div class="register-container" id="register">
             <form name='registerForm' action="/register" method='POST'>
                 <div class="top">
-                    <header>Sign Up</header>
+                    <header>Đăng Ký</header>
                 </div>
                 <div class="two-forms">
                     <div class="input-box">
-                        <input type="text" name="fullname" class="input-field" placeholder="FullName" required>
+                        <input type="text" name="fullname" class="input-field" placeholder="Tên đầy đủ" required>
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="username" class="input-field" placeholder="Username" required>
+                        <input type="text" name="username" class="input-field" placeholder="Tên đăng nhập" required>
                         <i class="bx bx-user"></i>
                     </div>
                 </div>
@@ -78,17 +76,21 @@
                     <i class="bx bx-envelope"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" class="input-field" placeholder="Password" required>
+                    <input type="password" name="password" class="input-field" placeholder="Mật khẩu" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
                 <div class="input-box">
-                    <input type="submit" class="submit" value="Register">
+                    <input type="password" name="rePassword" class="input-field" placeholder="Nhập lại mật khẩu" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box-submit">
+                    <input type="submit" class="submit" value="Đăng Ký">
                 </div>
                 <div class="two-col">
-                    <div class="one">
-                        <input type="checkbox" id="register-check">
-                        <label for="register-check"> Remember Me</label>
-                    </div>
+<!--                    <div class="one">-->
+<!--                        <input type="checkbox" id="register-check">-->
+<!--                        <label for="register-check"> Remember Me</label>-->
+<!--                    </div>-->
                     <div class="two">
                         <label><a href="#">Terms & conditions</a></label>
                     </div>
