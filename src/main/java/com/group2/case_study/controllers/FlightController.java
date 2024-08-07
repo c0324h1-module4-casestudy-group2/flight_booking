@@ -61,6 +61,7 @@ public class FlightController {
             @RequestParam("selectedDate") String selectedDate,
             @RequestParam("departureAirportCode") String departureAirportCode,
             @RequestParam("arrivalAirportCode") String arrivalAirportCode,
+            @RequestParam("passengers") int passengers,
             Model model) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
@@ -68,11 +69,12 @@ public class FlightController {
         LocalDateTime departureTime = null;
         departureTime = LocalDateTime.parse(selectedDate, formatter);
 
-        List<Flight> flights = flightService.findFlightsByDateAndAirports(departureTime, departureAirportCode, arrivalAirportCode);
+        List<Flight> flights = flightService.findFlightsByDateAndAirports(passengers , departureTime, departureAirportCode, arrivalAirportCode);
 
         Airport departureAirport = airportService.findByAirportCode(departureAirportCode);
         Airport arrivalAirport = airportService.findByAirportCode(arrivalAirportCode);
 
+        model.addAttribute("passengers" , passengers);
         model.addAttribute("flights", flights);
         model.addAttribute("departureAirportCode", departureAirportCode);
         model.addAttribute("arrivalAirportCode", arrivalAirportCode);
@@ -86,6 +88,7 @@ public class FlightController {
                                 @RequestParam("arrivalAirportId") Long arrivalAirportId,
                                 @RequestParam(value = "departure-date", defaultValue = "") String departureDateStr,
                                 @RequestParam(value = "return-date", defaultValue = "") String returnDateStr,
+                                @RequestParam("passengers") int passengers,
                                 @RequestParam("userName") String userName,
                                 HttpSession session,
                                 Model model) {
@@ -104,15 +107,15 @@ public class FlightController {
         List<Flight> flights;
 //        flights = flightService.findFlights(departureAirportId, arrivalAirportId);
         if (departureTime != null && arrivalTime != null) {
-            flights = flightService.findFlightDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
+            flights = flightService.findFlightDate(passengers, departureAirportId, arrivalAirportId, departureTime, arrivalTime);
         } else {
-            flights = flightService.findFlights(departureAirportId, arrivalAirportId);
+            flights = flightService.findFlights(passengers, departureAirportId, arrivalAirportId);
         }
 
         Airport departureAirport = airportService.findById(departureAirportId);
         Airport arrivalAirport = airportService.findById(arrivalAirportId);
 
-
+        model.addAttribute("passengers" , passengers);
         model.addAttribute("flights", flights);
         model.addAttribute("airports", airportService.findAll());
         model.addAttribute("departureAirport", departureAirport);
