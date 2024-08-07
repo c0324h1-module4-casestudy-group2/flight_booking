@@ -101,4 +101,9 @@ public class FlightController {
         model.addAttribute("booking", booking);
         return "flight/Tickets-booked";
     }
+
+    @GetMapping("/introduction")
+    public String introduction() {
+        return "flight/introduction";
+    }
 }

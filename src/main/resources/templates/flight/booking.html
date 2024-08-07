@@ -16,13 +16,14 @@
         <a class="navbar-brand" href="/home">
             SkyJourney
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Đặt vé</a>
+                    <a class="nav-link" href="/home">Đặt vé</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Liên hệ</a>
@@ -49,14 +50,19 @@
                             <i class="fas fa-plane-departure ticket-icon fs-2 d-flex alert"></i>
                         </div>
                         <div class="col-lg-4 col-sm-12 ticket-details">
-                            <h5><span th:text="${booking.flight.getArrivalAirport().airportName}"></span> - <span th:text="${booking.flight.getDepartureAirport().airportName}"></span></h5>
-                            <p>Ngày: <span th:text="${#temporals.format(booking.flight.arrivalTime, 'dd-MM-yyyy')}"></span> - Thời gian: <span th:text="${#temporals.format(booking.flight.arrivalTime, 'HH:mm')}"></span></p>
+                            <h5><span th:text="${booking.flight.getArrivalAirport().airportName}"></span> - <span
+                                    th:text="${booking.flight.getDepartureAirport().airportName}"></span></h5>
+                            <p>Ngày: <span
+                                    th:text="${#temporals.format(booking.flight.getDepartureTime(), 'dd-MM-yyyy')}"></span> -
+                                Thời gian: <span
+                                        th:text="${#temporals.format(booking.flight.getDepartureTime(), 'HH:mm')}"></span></p>
                         </div>
                         <div class="col-lg-5 col-sm-12 ticket-details">
                             <h3>Code: <span th:text="${booking.codeBooking}"></span></h3>
                         </div>
                         <div class="col-lg-2 col-sm-12">
-                            <p class="ticket-status status-confirmed text-center" th:text="${#numbers.formatDecimal(booking.totalPrice, 0, 'COMMA', 2, 'POINT')} + '₫'"></p>
+                            <p class="ticket-status status-confirmed text-center"
+                               th:text="${#numbers.formatDecimal(booking.totalPrice, 0, 'COMMA', 0, 'POINT')} + '₫'"></p>
                             <p class="ticket-status status-confirmed text-center" th:text="${booking.status}"></p>
                         </div>
                     </div>
@@ -65,5 +71,7 @@
         </div>
     </div>
 </div>
+<div th:replace="common/layout.html :: footer"></div>
+
 </body>
 </html>

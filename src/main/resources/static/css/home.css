@@ -65,3 +65,12 @@
 #scrollToTop i {
     font-size: 20px; /* Kích thước icon */
 }
+
+.content-title {
+    color: #003366;
+}
+
+.swal2-confirm {
+    color: #fff;
+    background-color: #ffc107;
+}
