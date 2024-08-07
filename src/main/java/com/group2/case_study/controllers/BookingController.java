@@ -33,4 +33,5 @@ public class BookingController {
         model.addAttribute("bookings", bookings);
         return "/flight/booking";
     }
+
 }
