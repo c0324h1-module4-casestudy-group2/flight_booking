@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -53,6 +54,31 @@ public class FlightController {
         }
 
         return "flight/home";
+    }
+
+    @PostMapping("/flightDate")
+    public String searchFlightDate(
+            @RequestParam("selectedDate") String selectedDate,
+            @RequestParam("departureAirportCode") String departureAirportCode,
+            @RequestParam("arrivalAirportCode") String arrivalAirportCode,
+            Model model) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+        LocalDateTime departureTime = null;
+        departureTime = LocalDateTime.parse(selectedDate, formatter);
+
+        List<Flight> flights = flightService.findFlightsByDateAndAirports(departureTime, departureAirportCode, arrivalAirportCode);
+
+        Airport departureAirport = airportService.findByAirportCode(departureAirportCode);
+        Airport arrivalAirport = airportService.findByAirportCode(arrivalAirportCode);
+
+        model.addAttribute("flights", flights);
+        model.addAttribute("departureAirportCode", departureAirportCode);
+        model.addAttribute("arrivalAirportCode", arrivalAirportCode);
+        model.addAttribute("departureAirport", departureAirport);
+        model.addAttribute("arrivalAirport", arrivalAirport);
+        return "flight/list";
     }
 
     @PostMapping("/flights")

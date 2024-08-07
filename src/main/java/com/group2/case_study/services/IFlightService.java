@@ -13,5 +13,7 @@ public interface IFlightService {
 
     List<Flight> findFlightDate(Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime);
 
+    List<Flight> findFlightsByDateAndAirports(LocalDateTime departureTime, String departureAirportCode, String arrivalAirportCode);
+
     Flight findById(int flightId);
 }

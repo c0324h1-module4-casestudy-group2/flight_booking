@@ -9,4 +9,6 @@ public interface IAirportService {
     List<Airport> findAll();
 
     Airport findById(Long AirportId);
+
+    Airport findByAirportCode(String airportCode);
 }
