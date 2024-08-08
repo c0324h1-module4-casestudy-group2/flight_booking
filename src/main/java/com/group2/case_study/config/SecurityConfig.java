@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -40,8 +42,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login", "/logoutSuccessful", "/register","/ticket/**", "/css/**", "/js/**").permitAll()
-                                .requestMatchers("/student/create", "/logout").authenticated()
+                                .requestMatchers("/login", "/logoutSuccessful", "/register", "/css/**", "/js/**").permitAll()
+                                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "EMPLOYEE")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -51,14 +53,28 @@ public class SecurityConfig {
                                 .loginPage("/login")
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/home", true)
-                )
+                                .successHandler(customAuthenticationSuccessHandler())
+                                .permitAll())                              
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/logoutSuccessful")
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedHandler(accessDeniedHandler())
                 );
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> response.sendRedirect("/errorr");
     }
 }

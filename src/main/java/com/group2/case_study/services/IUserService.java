@@ -2,8 +2,11 @@ package com.group2.case_study.services;
 
 import com.group2.case_study.models.User;
 
-public interface IUserService {
-    User findByName(String userName);
+import java.util.List;
 
-    User findUserByUsername(String username);
+public interface IUserService {
+    List<User> findAll();
+    User findById(Integer id);
+    void save(User user);
+    void deleteById(Integer id);
 }

@@ -16,7 +16,8 @@
     <p class="error-details">Xin lỗi, bạn không có quyền truy cập vào trang này. Giống như một chuyến bay không được phép cất cánh, trang bạn đang cố truy cập hiện không khả dụng cho tài khoản của bạn.</p>
     <div class="mb-4">
         <button class="btn btn-primary me-3" onclick="goHome()">
-            <i class="fas fa-home me-2"></i>Quay lại trang chủ
+          <a th:href="@{flight/home}"><i class="fas fa-home me-2"></i>Quay lại trang chủ</a>
+<!--            <i class="fas fa-home me-2"></i>Quay lại trang chủ-->
         </button>
         <button class="btn btn-secondary" onclick="contactSupport()">
             <i class="fas fa-headset me-2"></i>Liên hệ hỗ trợ
