@@ -27,11 +27,11 @@ $('.failed').click(() => {
 
 document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.swiper-container', {
-        slidesPerView: 4, // Hiển thị 4 thẻ cùng một lúc
+        slidesPerView: 4,
         spaceBetween: 10,
         loop: true,
         autoplay: {
-            delay: 3000, // Tự động trượt sau mỗi 3 giây
+            delay: 3000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready( function () {
 // xử lý select dropdown
     document.querySelectorAll('.departure-item').forEach(el => {
         el.addEventListener('click', event => {
@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             inputId.value = airportId;
         });
     });
+
     document.querySelectorAll('.arrival-item').forEach(el => {
         el.addEventListener('click', event => {
             const airportCity = el.querySelector(".city-arrival").textContent;

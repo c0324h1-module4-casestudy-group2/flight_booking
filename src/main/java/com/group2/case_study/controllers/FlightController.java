@@ -74,10 +74,10 @@ public class FlightController {
 //    }
 
     @PostMapping("/flights/search")
-    public String searchFlights(@RequestParam ("departureAirportId") Integer departureAirportId,
-                                @RequestParam ("arrivalAirportId") Integer arrivalAirportId,
-                                @RequestParam ("departure-date") String departureDate,
-                                @RequestParam ("passengers") Integer passengers,
+    public String searchFlights(@RequestParam (value = "departureAirportId", defaultValue = "1") Integer departureAirportId,
+                                @RequestParam (value = "arrivalAirportId", defaultValue = "1") Integer arrivalAirportId,
+                                @RequestParam (value = "departure-date", defaultValue = "01-01-2024") String departureDate,
+                                @RequestParam (value = "passengers", defaultValue = "1") Integer passengers,
                                 Model model
                                 ) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
