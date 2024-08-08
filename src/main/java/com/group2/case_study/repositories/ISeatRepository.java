@@ -25,6 +25,11 @@ public interface ISeatRepository extends JpaRepository<Seat, Integer> {
 
     @Modifying
     @Transactional
+    @Query("UPDATE Seat s SET s.availabilityStatus = :status WHERE s.seatId = :seatId")
+    void updateSeatStatusConfig(Integer seatId, String status);
+
+    @Modifying
+    @Transactional
     @Query("UPDATE Seat s SET s.availabilityStatus = 'AVAILABLE', s.holdExpiration = NULL WHERE s.availabilityStatus = 'HOLD' AND s.holdExpiration < :now")
     void updateSeatsToAvailableIfExpired(LocalDateTime now);
 
