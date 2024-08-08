@@ -46,6 +46,74 @@ public class FlightController {
         return "flight/home";
     }
 
+    @PostMapping("/flightDate")
+    public String searchFlightDate(
+            @RequestParam("selectedDate") String selectedDate,
+            @RequestParam("departureAirportCode") String departureAirportCode,
+            @RequestParam("arrivalAirportCode") String arrivalAirportCode,
+            @RequestParam("passengers") int passengers,
+            Model model) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+        LocalDateTime departureTime = null;
+        departureTime = LocalDateTime.parse(selectedDate, formatter);
+
+        List<Flight> flights = flightService.findFlightsByDateAndAirports(passengers , departureTime, departureAirportCode, arrivalAirportCode);
+
+        Airport departureAirport = airportService.findByAirportCode(departureAirportCode);
+        Airport arrivalAirport = airportService.findByAirportCode(arrivalAirportCode);
+
+        model.addAttribute("passengers" , passengers);
+        model.addAttribute("flights", flights);
+        model.addAttribute("departureAirportCode", departureAirportCode);
+        model.addAttribute("arrivalAirportCode", arrivalAirportCode);
+        model.addAttribute("departureAirport", departureAirport);
+        model.addAttribute("arrivalAirport", arrivalAirport);
+        return "flight/list";
+    }
+
+    @PostMapping("/flights")
+    public String searchFlights(@RequestParam("departureAirportId") Long departureAirportId,
+                                @RequestParam("arrivalAirportId") Long arrivalAirportId,
+                                @RequestParam(value = "departure-date", defaultValue = "") String departureDateStr,
+                                @RequestParam(value = "return-date", defaultValue = "") String returnDateStr,
+                                @RequestParam("passengers") int passengers,
+                                @RequestParam("userName") String userName,
+                                HttpSession session,
+                                Model model) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+        LocalDateTime departureTime = null;
+        LocalDateTime arrivalTime = null;
+
+        if (!departureDateStr.isEmpty()) {
+            departureTime = LocalDateTime.parse(departureDateStr, formatter);
+        }
+        if (!returnDateStr.isEmpty()) {
+            arrivalTime = LocalDateTime.parse(returnDateStr, formatter);
+        }
+
+        List<Flight> flights;
+//        flights = flightService.findFlights(departureAirportId, arrivalAirportId);
+        if (departureTime != null && arrivalTime != null) {
+            flights = flightService.findFlightDate(passengers, departureAirportId, arrivalAirportId, departureTime, arrivalTime);
+        } else {
+            flights = flightService.findFlights(passengers, departureAirportId, arrivalAirportId);
+        }
+
+        Airport departureAirport = airportService.findById(departureAirportId);
+        Airport arrivalAirport = airportService.findById(arrivalAirportId);
+
+        model.addAttribute("passengers" , passengers);
+        model.addAttribute("flights", flights);
+        model.addAttribute("airports", airportService.findAll());
+        model.addAttribute("departureAirport", departureAirport);
+        model.addAttribute("arrivalAirport", arrivalAirport);
+        session.setAttribute("userName", userName);
+        return "flight/list";
+    }
+
     @GetMapping("/booked")
     public String booked(@RequestParam("booked") String booked, Model model) {
         Booking booking = bookingService.findByCode(booked);
