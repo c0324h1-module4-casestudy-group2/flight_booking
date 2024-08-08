@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AirportRepository extends JpaRepository<Airport , Long> {
+public interface AirportRepository extends JpaRepository<Airport , Integer> {
 
     @Query("SELECT a FROM Airport a WHERE a.airportCode = :airportCode")
     Airport findByAirportCode(String airportCode);

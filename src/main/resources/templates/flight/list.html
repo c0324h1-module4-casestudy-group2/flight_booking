@@ -16,20 +16,20 @@
             <h1><i class="fas fa-plane-departure me-3"></i>Lựa Chọn Chuyến Bay</h1>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="location-info">
-                <p><i class="fas fa-map-marker-alt me-2" id="departureAirportId"></i>Điểm khởi hành</p>
-                <h3 th:text="${departureAirport.airportName} + ' (' + ${departureAirport.airportCode} + ')'"></h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="location-info">
-                <p><i class="fas fa-map-marker-alt me-2"></i>Điểm đến</p>
-                <h3 th:text="${arrivalAirport.airportName} + ' (' + ${arrivalAirport.airportCode} + ')'"></h3>
-            </div>
-        </div>
-    </div>
+<!--    <div class="row mt-4">-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="location-info">-->
+<!--                <p><i class="fas fa-map-marker-alt me-2" id="departureAirportId"></i>Điểm khởi hành</p>-->
+<!--                <h3 th:text="${departureAirport.airportName} + ' (' + ${departureAirport.airportCode} + ')'"></h3>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="location-info">-->
+<!--                <p><i class="fas fa-map-marker-alt me-2"></i>Điểm đến</p>-->
+<!--                <h3 th:text="${arrivalAirport.airportName} + ' (' + ${arrivalAirport.airportCode} + ')'"></h3>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="row mt-3">
         <div class="col-12">
             <form id="search-form" action="/flightDate" method="post">

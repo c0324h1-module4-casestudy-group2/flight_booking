@@ -100,4 +100,15 @@ public class FlightService implements IFlightService {
     public Flight findById(int flightId) {
         return flightRepository.findById(flightId).orElse(null);
     }
+
+    @Override
+    public List<Flight> findAll() {
+        return flightRepository.findAll();
+    }
+
+    @Override
+    public List<Flight> findAllFlights(LocalDate localDate, Integer arrivalAirportId, Integer departureAirportId) {
+        return flightRepository.findFlights(localDate, arrivalAirportId, departureAirportId);
+    }
+
 }

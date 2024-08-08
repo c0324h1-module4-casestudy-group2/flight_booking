@@ -20,7 +20,7 @@ public class AirportService implements IAirportService {
     }
 
     @Override
-    public Airport findById(Long AirportId) {
+    public Airport findById(Integer AirportId) {
         return airportRepository.findById(AirportId).orElse(null);
     }
 

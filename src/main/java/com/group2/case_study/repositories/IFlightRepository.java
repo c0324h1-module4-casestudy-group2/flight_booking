@@ -3,6 +3,7 @@ package com.group2.case_study.repositories;
 import com.group2.case_study.models.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -18,4 +19,11 @@ public interface IFlightRepository extends JpaRepository<Flight, Integer> {
 
     @Query("SELECT f FROM Flight f WHERE DATE(f.departureTime) = DATE(:departureTime) AND f.departureAirport.airportCode = :departureAirportCode AND f.arrivalAirport.airportCode = :arrivalAirportCode")
     List<Flight> findFlightByDate(LocalDateTime departureTime, String departureAirportCode, String arrivalAirportCode);
+
+    @Query("SELECT f FROM Flight f WHERE FUNCTION('DATE', f.departureTime) = :localDate AND f.arrivalAirport.airportId = :arrivalAirportId AND f.departureAirport.airportId = :departureAirportId")
+    List<Flight> findFlights(
+            @Param("localDate") LocalDate localDate,
+            @Param("arrivalAirportId") Integer arrivalAirportId,
+            @Param("departureAirportId") Integer departureAirportId
+    );
 }
