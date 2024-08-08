@@ -9,9 +9,11 @@ import java.util.List;
 public interface IFlightService {
     Flight getFlightById(Integer flightId);
 
-    List<Flight> findFlights(Long departureAirportId, Long arrivalAirportId);
+    List<Flight> findFlights(int passengers ,Long departureAirportId, Long arrivalAirportId);
 
-    List<Flight> findFlightDate(Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime);
+    List<Flight> findFlightDate(int passengers ,Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime);
+
+    List<Flight> findFlightsByDateAndAirports(int passengers ,LocalDateTime departureTime, String departureAirportCode, String arrivalAirportCode);
 
     Flight findById(int flightId);
 }
