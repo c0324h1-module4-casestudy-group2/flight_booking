@@ -1,8 +1,8 @@
 INSERT INTO seats (availability_status, class_type, hold_expiration, seat_number, flight_id)
 VALUES
-    ('UNAVAILABLE', 'Economy', null, '1A', 2),
-    ('UNAVAILABLE', 'Economy', null, '1B', 2),
-    ('AVAILABLE', 'Economy', null, '1C', 2),
+    ('UNAVAILABLE', 'Economy', null, '1A', 3),
+    ('UNAVAILABLE', 'Economy', null, '1B', 3),
+    ('AVAILABLE', 'Economy', null, '1C', 3),
     ('AVAILABLE', 'Economy', null, '1D', 3),
     ('AVAILABLE', 'Economy', null, '1E', 3),
     ('AVAILABLE', 'Economy', null, '1F', 3),

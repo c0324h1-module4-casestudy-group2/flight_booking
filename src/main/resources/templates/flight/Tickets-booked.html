@@ -51,10 +51,11 @@
                         <div class="col-lg-4 col-sm-12 ticket-details">
                             <h5><span th:text="${booking.getFlight().getDepartureAirport().getCity()}"></span> - <span th:text="${booking.flight.getArrivalAirport().getCity()}"></span></h5>
                             <p>Ngày: <span th:text="${#temporals.format(booking.flight.arrivalTime, 'dd-MM-yyyy')}"></span> - Thời gian: <span th:text="${#temporals.format(booking.flight.arrivalTime, 'HH:mm')}"></span></p>
+                            <h4 th:text="${booking.getName()}"></h4>
                         </div>
                         <div class="col-lg-5 col-sm-12 ticket-details">
                             <h3>Mã vé: <span th:text="${booking.codeBooking}"></span></h3>
-                            <h3>Số ghế : <span th:text="${booking.numberOfSeats}"></span> </h3>
+                            <h4>Số ghế : <span th:text="${booking.numberOfSeats}"></span> </h4>
                         </div>
                         <div class="col-lg-2 col-sm-12">
                             <p class="ticket-status status-confirmed text-center" th:text="${#numbers.formatDecimal(booking.totalPrice, 0, 'COMMA', 2, 'POINT')} + '₫'"></p>

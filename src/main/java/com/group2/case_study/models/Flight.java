@@ -34,4 +34,5 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
 }

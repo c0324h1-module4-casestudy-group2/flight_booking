@@ -15,7 +15,4 @@ public interface IFlightRepository extends JpaRepository<Flight, Integer> {
 
     @Query("SELECT f FROM Flight f WHERE f.departureAirport.airportId = :departureAirportId AND f.arrivalAirport.airportId = :arrivalAirportId AND f.departureTime >= :departureTime AND f.arrivalTime <= :arrivalTime")
     List<Flight> findFlightByAirportAndDate(Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime);
-
-    @Query("SELECT f FROM Flight f WHERE DATE(f.departureTime) = DATE(:departureTime) AND f.departureAirport.airportCode = :departureAirportCode AND f.arrivalAirport.airportCode = :arrivalAirportCode")
-    List<Flight> findFlightByDate(LocalDateTime departureTime, String departureAirportCode, String arrivalAirportCode);
 }

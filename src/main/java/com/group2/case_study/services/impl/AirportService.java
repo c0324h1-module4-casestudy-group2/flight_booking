@@ -23,9 +23,4 @@ public class AirportService implements IAirportService {
     public Airport findById(Long AirportId) {
         return airportRepository.findById(AirportId).orElse(null);
     }
-
-    @Override
-    public Airport findByAirportCode(String airportCode) {
-        return airportRepository.findByAirportCode(airportCode);
-    }
 }
