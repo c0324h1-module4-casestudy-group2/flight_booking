@@ -33,30 +33,18 @@ public class FlightController {
     @Autowired
     private IBookingService bookingService;
 
-//    @GetMapping
-//    public String list(){
-//        return "flight/home";
-//    }
-
-//    @GetMapping("login")
-//    public String login(){
-//        return "login/login";
-//    }
-
     @GetMapping("/home")
     public String showSearchForm(Model model, Principal principal) {
         Iterable<Airport> airports = airportService.findAll();
         model.addAttribute("airports", airports);
 
         if (principal != null) {
-            String username = principal.getName(); // Lấy tên người dùng từ Principal
-            model.addAttribute("username", username); // Thêm tên người dùng vào mô hình
+            String username = principal.getName();
+            model.addAttribute("username", username);
         }
 
         return "flight/home";
     }
-
- 
 
     @GetMapping("/booked")
     public String booked(@RequestParam("booked") String booked, Model model) {
