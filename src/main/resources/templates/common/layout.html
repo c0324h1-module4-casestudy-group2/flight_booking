@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="/css/navbar.css">
         <link rel="stylesheet" href="/css/layout.css">
-        <link rel="stylesheet" href="/css/animate.css">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
                 integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"
                 async></script>
@@ -43,28 +42,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home me-1"></i><span> Trang Chủ</span></a>
+                        <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i> Trang
+                            Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/introduction"><i class="fas fa-plane-departure me-1"></i><span> Giới thiệu</span></a>
+                        <a class="nav-link" href="#"><i class="fas fa-plane-departure"></i> Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#check-booking"><i class="fas fa-search me-1"></i><span> Tra Cứu</span></a>
-                    </li>
-                    <li class="nav-item failed">
-                        <a class="nav-link" href="#"><i class="fas fa-headset me-1"></i><span> Hỗ Trợ</span></a>
+                        <a class="nav-link" href="#check-booking"><i class="fas fa-search"></i> Tra Cứu</a>
+                        <!-- Sửa biểu tượng -->
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user me-1"></i><span> Người dùng</span>
+                            <i class="fas fa-concierge-bell"></i> Dịch Vụ
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li><a class="dropdown-item" href="/booking-history"><i class="fa-solid fa-clock-rotate-left me-1"></i><span> Lịch sử giao dịch</span></a>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-suitcase-rolling"></i> Hành Lý</a>
                             </li>
-                            <li class="failed"><a class="dropdown-item" href="#"><i class="fas fa-utensils me-1"></i><span> Đặt Suất Ăn</span></a></li>
-                            <li class="failed"><a class="dropdown-item" href="#"><i class="fas fa-chair me-1"></i><span> Chọn Chỗ Ngồi</span></a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-utensils"></i> Đặt Suất Ăn</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-chair"></i> Chọn Chỗ Ngồi</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-headset"></i> Hỗ Trợ</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -80,7 +81,7 @@
                             <li><a class="dropdown-item language-item" href="#"><img
                                     src="https://img.icons8.com/color/48/000000/vietnam-circular.png"
                                     alt="Tiếng Việt"> Tiếng Việt</a></li>
-                            <li class="failed"><a class="dropdown-item language-item" href="#"><img
+                            <li><a class="dropdown-item language-item" href="#"><img
                                     src="https://img.icons8.com/color/48/000000/great-britain-circular.png"
                                     alt="English"> English</a></li>
                         </ul>
@@ -99,17 +100,18 @@
         <div class="row">
             <div class="col-lg-4 col-md-12 mb-4">
                 <h5 class="text-uppercase text-light">Đối tác thanh toán</h5>
-                <img class="img-payment" src="/images/payment.png" alt="img">
+
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5 class="text-uppercase text-light">Liên Hệ</h5>
                 <ul class="list-unstyled">
                     <li>
                         <a href="#!" class="text-light"><i class="fa-solid fa-square-envelope"></i> Email:
-                            skyjourneyairline@gmail.com</a>
+                            support@vemaybay.com</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-light"><i class="fa-solid fa-square-phone"></i> SĐT: +84 339 198 933</a>
+                        <a href="#!" class="text-light"><i class="fa-solid fa-square-phone"></i> SĐT: +84 123 456
+                            789</a>
                     </li>
                 </ul>
             </div>
@@ -117,7 +119,7 @@
                 <h5 class="text-uppercase text-light">Theo Dõi Chúng Tôi</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="https://www.facebook.com/profile.php?id=100038991166471" class="text-light"><i class="fa-brands fa-square-facebook"></i> Facebook</a>
+                        <a href="#!" class="text-light"><i class="fa-brands fa-square-facebook"></i> Facebook</a>
                     </li>
                     <li>
                         <a href="#!" class="text-light"><i class="fa-brands fa-square-twitter"></i> Twitter</a>
@@ -134,6 +136,11 @@
     </div>
 </footer>
 
+
+<script>
+
+
+</script>
 <script>
     flatpickr(".date-flatpickr", {
         dateFormat: 'd-m-Y',
@@ -141,7 +148,6 @@
         maxDate: new Date().fp_incr(14)
     });
 </script>
-
 </body>
 
 </html>
