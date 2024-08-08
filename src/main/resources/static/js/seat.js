@@ -14,9 +14,24 @@ function updateSummary() {
     document.getElementById('seat-ids').value = seatIds.join(',');
 }
 
+function updateSeatInputValue() {
+    // Lấy dữ liệu từ thẻ có id là selected-seats
+    let selectedSeatsText = document.getElementById('total-price').innerText;
+
+    // Chọn thẻ input có name là seat và gán giá trị vào
+    let seatInput = document.getElementById('price-total');
+    seatInput.value = selectedSeatsText;
+}
+
 function toggleSeat(seatElement) {
-    if (seatElement.classList.contains('unavailable')) return;
+    if (seatElement.classList.contains('unavailable') || seatElement.classList.contains('hold')) return;
 
     seatElement.classList.toggle('selected');
     updateSummary();
+    updateSeatInputValue();
 }
+
+document.querySelector('form[action="/pay"]').addEventListener('submit', function() {
+    updateSeatInputValue();
+});
+

@@ -14,50 +14,89 @@
             <h3>Chỉnh sửa chuyến bay</h3>
         </div>
         <div class="card-body">
-            <form th:action="@{/admin/flights/update/{id}(id=${flight.flightId})}" th:object="${flight}" method="post">
+            <div th:if="${error}" class="alert alert-danger">
+                <span th:text="${error}"></span>
+            </div>
+            <form th:action="@{/admin/flights/edit/{id}(id=${flight.flightId})}" th:object="${flight}" method="post">
                 <div class="mb-3">
                     <label for="flightNumber" class="form-label">Số chuyến bay</label>
                     <input type="text" id="flightNumber" class="form-control" th:field="*{flightNumber}" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập số chuyến bay.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="airline" class="form-label">Hãng hàng không</label>
                     <input type="text" id="airline" class="form-control" th:field="*{airline}" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập tên hãng hàng không.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="departureAirport" class="form-label">Sân bay khởi hành</label>
-                    <select id="departureAirport" class="form-select" th:field="*{departureAirport}" required>
-                        <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                    <select id="departureAirport" class="form-select" th:field="*{departureAirport.airportId}" required>
+                        <option th:each="airport : ${airports}" th:value="${airport.airportId}"
+                                th:text="${airport.airportName}"></option>
                     </select>
+                    <div class="invalid-feedback">
+                        Vui lòng chọn sân bay khởi hành.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="arrivalAirport" class="form-label">Sân bay đến</label>
-                    <select id="arrivalAirport" class="form-select" th:field="*{arrivalAirport}" required>
-                        <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
+                    <select id="arrivalAirport" class="form-select" th:field="*{arrivalAirport.airportId}" required>
+                        <option th:each="airport : ${airports}" th:value="${airport.airportId}"
+                                th:text="${airport.airportName}"></option>
                     </select>
+                    <div class="invalid-feedback">
+                        Vui lòng chọn sân bay đến.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="departureTime" class="form-label">Thời gian khởi hành</label>
-                    <input type="datetime-local" id="departureTime" class="form-control" th:field="*{departureTime}" value="${#temporals.format(flight.departureTime, 'yyyy-MM-dd\'T\'HH:mm')}" required>
+                    <input type="datetime-local" id="departureTime" class="form-control" th:field="*{departureTime}"
+                           required>
+                    <div class="invalid-feedback">
+                        Vui lòng chọn thời gian khởi hành.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="arrivalTime" class="form-label">Thời gian đến</label>
-                    <input type="datetime-local" id="arrivalTime" class="form-control" th:field="*{arrivalTime}" value="${#temporals.format(flight.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm')}" required>
+                    <input type="datetime-local" id="arrivalTime" class="form-control" th:field="*{arrivalTime}"
+                           required>
+                    <div class="invalid-feedback">
+                        Vui lòng chọn thời gian đến.
+                    </div>
                 </div>
+
                 <div class="mb-3">
-                    <label for="seatCapacity" class="form-label">Chỗ ngồi</label>
-                    <input type="text" id="seatCapacity" class="form-control" th:field="*{seatCapacity}" required>
+                    <label for="seatCapacity" class="form-label">Số ghế</label>
+                    <input type="number" id="seatCapacity" class="form-control" th:field="*{seatCapacity}" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập số lượng ghế.
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="price" class="form-label">Giá</label>
                     <input type="number" id="price" class="form-control" th:field="*{price}" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập giá chuyến bay.
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="/admin/flights" class="btn btn-secondary">Hủy</a>
-            </form>
 
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <a href="/admin/flights" class="btn btn-secondary">Quay lại</a>
+            </form>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -18,4 +18,14 @@ public class AirportService implements IAirportService {
     public List<Airport> findAll() {
         return airportRepository.findAll();
     }
+
+    @Override
+    public Airport findById(Long AirportId) {
+        return airportRepository.findById(AirportId).orElse(null);
+    }
+
+    @Override
+    public Airport findByAirportCode(String airportCode) {
+        return airportRepository.findByAirportCode(airportCode);
+    }
 }

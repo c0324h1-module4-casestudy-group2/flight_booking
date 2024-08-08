@@ -38,8 +38,20 @@ public class AdminFlightController {
         return "admin/flight/flight-form-new";
     }
 
-    @PostMapping
-    public String saveFlight(@ModelAttribute("flight") Flight flight, RedirectAttributes redirectAttributes) {
+    @PostMapping("/new")
+    public String saveFlight(@ModelAttribute("flight") Flight flight, RedirectAttributes redirectAttributes, Model model) {
+        if (flight.getDepartureAirport().equals(flight.getArrivalAirport())) {
+            model.addAttribute("error", "Sân bay khởi hành và sân bay đến không được trùng nhau.");
+            List<Airport> airports = adminAirportService.getAllAirports();
+            model.addAttribute("airports", airports);
+            return "admin/flight/flight-form-new";
+        }
+        if (flight.getDepartureTime().isAfter(flight.getArrivalTime()) || flight.getDepartureTime().equals(flight.getArrivalTime())) {
+            model.addAttribute("error", "Thời gian khởi hành và thời gian đến không hợp lệ.");
+            List<Airport> airports = adminAirportService.getAllAirports();
+            model.addAttribute("airports", airports);
+            return "admin/flight/flight-form-new";
+        }
         adminFlightService.saveFlight(flight);
         redirectAttributes.addFlashAttribute("message", "Thêm chuyến bay thành công!");
         return "redirect:/admin/flights";
@@ -57,15 +69,27 @@ public class AdminFlightController {
         return "admin/flight/flight-form-edit";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateFlight(@PathVariable Integer id, @ModelAttribute("flight") Flight flight, RedirectAttributes redirectAttributes) {
+    @PostMapping("/edit/{id}")
+    public String updateFlight(@PathVariable Integer id, @ModelAttribute("flight") Flight flight, RedirectAttributes redirectAttributes, Model model) {
+        if (flight.getDepartureAirport().equals(flight.getArrivalAirport())) {
+            model.addAttribute("error", "Sân bay khởi hành và sân bay đến không được trùng nhau.");
+            List<Airport> airports = adminAirportService.getAllAirports();
+            model.addAttribute("airports", airports);
+            return "admin/flight/flight-form-edit";
+        }
+        if (flight.getDepartureTime().isAfter(flight.getArrivalTime()) || flight.getDepartureTime().equals(flight.getArrivalTime())) {
+            model.addAttribute("error", "Thời gian khởi hành và thời gian đến không hợp lệ.");
+            List<Airport> airports = adminAirportService.getAllAirports();
+            model.addAttribute("airports", airports);
+            return "admin/flight/flight-form-edit";
+        }
         flight.setFlightId(id);
         adminFlightService.saveFlight(flight);
         redirectAttributes.addFlashAttribute("message", "Cập nhật chuyến bay thành công!");
         return "redirect:/admin/flights";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteFlight(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         adminFlightService.deleteFlight(id);
         redirectAttributes.addFlashAttribute("message", "Xóa chuyến bay thành công!");
@@ -81,5 +105,4 @@ public class AdminFlightController {
         model.addAttribute("flight", flight);
         return "admin/flight/flight-form-view";
     }
-
 }

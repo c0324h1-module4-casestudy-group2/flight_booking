@@ -54,7 +54,7 @@ public class SecurityConfig {
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
                                 .successHandler(customAuthenticationSuccessHandler())
-                                .permitAll())
+                                .permitAll())                              
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true)
