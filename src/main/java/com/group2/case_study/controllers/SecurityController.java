@@ -3,9 +3,11 @@ package com.group2.case_study.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/")
 public class SecurityController {
 
     @GetMapping("/admin")
@@ -35,5 +37,10 @@ public class SecurityController {
     public String homePage(Model model) {
         model.addAttribute("title", "Home");
         return "flight/home";
+    }
+
+    @GetMapping("/errorr")
+    public String handleAccessDenied() {
+        return "error/error";
     }
 }

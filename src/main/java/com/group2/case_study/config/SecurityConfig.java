@@ -1,4 +1,3 @@
-// File: com/group2/case_study/config/SecurityConfig.java
 package com.group2.case_study.config;
 
 import com.group2.case_study.services.impl.UserInforDetailService;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
@@ -54,13 +54,16 @@ public class SecurityConfig {
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
                                 .successHandler(customAuthenticationSuccessHandler())
-                                .permitAll()
-                )
+                                .permitAll())
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/logoutSuccessful")
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedHandler(accessDeniedHandler())
                 );
         return http.build();
     }
@@ -68,5 +71,10 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> response.sendRedirect("/errorr");
     }
 }
