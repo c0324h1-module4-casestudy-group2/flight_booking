@@ -31,17 +31,12 @@ public class FlightService implements IFlightService {
     public List<Flight> findFlights(int passengers ,Long departureAirportId, Long arrivalAirportId) {
         List<Flight> flights = flightRepository.findByDepartureAirport_AirportIdAndArrivalAirport_AirportId(departureAirportId, arrivalAirportId);
         List<Flight> flightsToRemove = new ArrayList<>();
-        LocalDateTime now = LocalDateTime.now();
 
         for (Flight flight : flights) {
             int availableSeats = (int) seatService.countAvailableSeatsByFlightId(flight.getFlightId());
             flight.setSeatCapacity(availableSeats);
 
             if (availableSeats < passengers) {
-                flightsToRemove.add(flight);
-            }
-
-            if (flight.getDepartureTime().isBefore(now)) {
                 flightsToRemove.add(flight);
             }
         }
@@ -54,17 +49,12 @@ public class FlightService implements IFlightService {
     public List<Flight> findFlightDate(int passengers ,Long departureAirportId, Long arrivalAirportId, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         List<Flight> flights = flightRepository.findFlightByAirportAndDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
         List<Flight> flightsToRemove = new ArrayList<>();
-        LocalDateTime now = LocalDateTime.now();
 
         for (Flight flight : flights) {
             int availableSeats = (int) seatService.countAvailableSeatsByFlightId(flight.getFlightId());
             flight.setSeatCapacity(availableSeats);
 
             if (availableSeats < passengers) {
-                flightsToRemove.add(flight);
-            }
-
-            if (flight.getDepartureTime().isBefore(now)) {
                 flightsToRemove.add(flight);
             }
         }
@@ -77,17 +67,12 @@ public class FlightService implements IFlightService {
     public List<Flight> findFlightsByDateAndAirports(int passengers , LocalDateTime departureTime, String departureAirportCode, String arrivalAirportCode) {
         List<Flight> flights = flightRepository.findFlightByDate(departureTime,departureAirportCode,arrivalAirportCode);
         List<Flight> flightsToRemove = new ArrayList<>();
-        LocalDateTime now = LocalDateTime.now();
 
         for (Flight flight : flights) {
             int availableSeats = (int) seatService.countAvailableSeatsByFlightId(flight.getFlightId());
             flight.setSeatCapacity(availableSeats);
 
             if (availableSeats < passengers) {
-                flightsToRemove.add(flight);
-            }
-
-            if (flight.getDepartureTime().isBefore(now)) {
                 flightsToRemove.add(flight);
             }
         }
