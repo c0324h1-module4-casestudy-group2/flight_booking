@@ -47,7 +47,7 @@
         <form action="#" th:action="@{/flights}" method="post">
             <div class="row">
                 <div class="col-md-6 mb-3">
-<!--                    <label for="departure" class="form-label">Điểm Khởi Hành</label>-->
+                    <!--                    <label for="departure" class="form-label">Điểm Khởi Hành</label>-->
 <!--                    <div class="dropdown location-dropdown">-->
 <!--                        <input type="text" class="form-control location-input dropdown-toggle" id="departure"-->
 <!--                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
@@ -60,7 +60,7 @@
 <!--                    </div>-->
                     <div class="mb-3">
                         <label class="form-label" for="departureAirportId">Điểm Khởi Hành</label>
-                        <select name="departureAirportId" id="departureAirportId" class="form-select">
+                        <select name="departureAirportId" id="departureAirportId" class="form-select custom-select">
                             <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
                         </select>
                     </div>

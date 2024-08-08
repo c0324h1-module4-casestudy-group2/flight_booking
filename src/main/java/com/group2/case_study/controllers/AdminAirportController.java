@@ -3,6 +3,7 @@ package com.group2.case_study.controllers;
 import com.group2.case_study.models.Airport;
 import com.group2.case_study.services.IAdminAirportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,10 +56,14 @@ public class AdminAirportController {
         return "redirect:/admin/airports";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteAirport(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        adminAirportService.deleteAirport(id);
-        redirectAttributes.addFlashAttribute("message", "Xóa sân bay thành công!");
+        try {
+            adminAirportService.deleteAirport(id);
+            redirectAttributes.addFlashAttribute("message", "Xóa sân bay thành công!");
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("error", "Không thể xóa sân bay này vì nó đang được sử dụng trong các chuyến bay.");
+        }
         return "redirect:/admin/airports";
     }
 
