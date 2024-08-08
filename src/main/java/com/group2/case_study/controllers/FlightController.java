@@ -56,45 +56,7 @@ public class FlightController {
         return "flight/home";
     }
 
-    @PostMapping("/flights")
-    public String searchFlights(@RequestParam("departureAirportId") Long departureAirportId,
-                                @RequestParam("arrivalAirportId") Long arrivalAirportId,
-                                @RequestParam(value = "departure-date", defaultValue = "") String departureDateStr,
-                                @RequestParam(value = "return-date", defaultValue = "") String returnDateStr,
-                                @RequestParam("userName") String userName,
-                                HttpSession session,
-                                Model model) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-        LocalDateTime departureTime = null;
-        LocalDateTime arrivalTime = null;
-
-        if (!departureDateStr.isEmpty()) {
-            departureTime = LocalDateTime.parse(departureDateStr, formatter);
-        }
-        if (!returnDateStr.isEmpty()) {
-            arrivalTime = LocalDateTime.parse(returnDateStr, formatter);
-        }
-
-        List<Flight> flights;
-//        flights = flightService.findFlights(departureAirportId, arrivalAirportId);
-        if (departureTime != null && arrivalTime != null) {
-            flights = flightService.findFlightDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
-        } else {
-            flights = flightService.findFlights(departureAirportId, arrivalAirportId);
-        }
-
-        Airport departureAirport = airportService.findById(departureAirportId);
-        Airport arrivalAirport = airportService.findById(arrivalAirportId);
-
-
-        model.addAttribute("flights", flights);
-        model.addAttribute("airports", airportService.findAll());
-        model.addAttribute("departureAirport", departureAirport);
-        model.addAttribute("arrivalAirport", arrivalAirport);
-        session.setAttribute("userName", userName);
-        return "flight/list";
-    }
+ 
 
     @GetMapping("/booked")
     public String booked(@RequestParam("booked") String booked, Model model) {
