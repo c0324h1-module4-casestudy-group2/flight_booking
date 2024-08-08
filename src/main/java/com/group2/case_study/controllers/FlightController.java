@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,39 +56,11 @@ public class FlightController {
         return "flight/home";
     }
 
-    @PostMapping("/flightDate")
-    public String searchFlightDate(
-            @RequestParam("selectedDate") String selectedDate,
-            @RequestParam("departureAirportCode") String departureAirportCode,
-            @RequestParam("arrivalAirportCode") String arrivalAirportCode,
-            @RequestParam("passengers") int passengers,
-            Model model) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
-
-        LocalDateTime departureTime = null;
-        departureTime = LocalDateTime.parse(selectedDate, formatter);
-
-        List<Flight> flights = flightService.findFlightsByDateAndAirports(passengers , departureTime, departureAirportCode, arrivalAirportCode);
-
-        Airport departureAirport = airportService.findByAirportCode(departureAirportCode);
-        Airport arrivalAirport = airportService.findByAirportCode(arrivalAirportCode);
-
-        model.addAttribute("passengers" , passengers);
-        model.addAttribute("flights", flights);
-        model.addAttribute("departureAirportCode", departureAirportCode);
-        model.addAttribute("arrivalAirportCode", arrivalAirportCode);
-        model.addAttribute("departureAirport", departureAirport);
-        model.addAttribute("arrivalAirport", arrivalAirport);
-        return "flight/list";
-    }
-
     @PostMapping("/flights")
     public String searchFlights(@RequestParam("departureAirportId") Long departureAirportId,
                                 @RequestParam("arrivalAirportId") Long arrivalAirportId,
                                 @RequestParam(value = "departure-date", defaultValue = "") String departureDateStr,
                                 @RequestParam(value = "return-date", defaultValue = "") String returnDateStr,
-                                @RequestParam("passengers") int passengers,
                                 @RequestParam("userName") String userName,
                                 HttpSession session,
                                 Model model) {
@@ -107,15 +79,15 @@ public class FlightController {
         List<Flight> flights;
 //        flights = flightService.findFlights(departureAirportId, arrivalAirportId);
         if (departureTime != null && arrivalTime != null) {
-            flights = flightService.findFlightDate(passengers, departureAirportId, arrivalAirportId, departureTime, arrivalTime);
+            flights = flightService.findFlightDate(departureAirportId, arrivalAirportId, departureTime, arrivalTime);
         } else {
-            flights = flightService.findFlights(passengers, departureAirportId, arrivalAirportId);
+            flights = flightService.findFlights(departureAirportId, arrivalAirportId);
         }
 
         Airport departureAirport = airportService.findById(departureAirportId);
         Airport arrivalAirport = airportService.findById(arrivalAirportId);
 
-        model.addAttribute("passengers" , passengers);
+
         model.addAttribute("flights", flights);
         model.addAttribute("airports", airportService.findAll());
         model.addAttribute("departureAirport", departureAirport);

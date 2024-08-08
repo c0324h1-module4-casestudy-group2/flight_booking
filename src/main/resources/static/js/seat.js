@@ -16,10 +16,10 @@ function updateSummary() {
 
 function updateSeatInputValue() {
     // Lấy dữ liệu từ thẻ có id là selected-seats
-    let selectedSeatsText = document.getElementById('selected-seats').innerText;
+    let selectedSeatsText = document.getElementById('total-price').innerText;
 
     // Chọn thẻ input có name là seat và gán giá trị vào
-    let seatInput = document.getElementById('seat-input');
+    let seatInput = document.getElementById('price-total');
     seatInput.value = selectedSeatsText;
 }
 
