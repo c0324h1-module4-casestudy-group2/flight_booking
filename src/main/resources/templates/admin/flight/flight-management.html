@@ -85,7 +85,8 @@
                             <td th:text="${flight.departureTime}"></td>
                             <td th:text="${flight.arrivalTime}"></td>
                             <td th:text="${flight.seatCapacity}"></td>
-                            <td th:text="${flight.price}"></td>
+<!--                            <td th:text="${flight.price}"></td>-->
+                            <td th:text="${#numbers.formatDecimal(flight.price, 0, 'COMMA', 0, 'POINT')}" class="price"></td>
                             <td>
                                 <a th:href="@{'/admin/flights/view/' + ${flight.flightId}}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                 <a th:href="@{'/admin/flights/edit/' + ${flight.flightId}}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>

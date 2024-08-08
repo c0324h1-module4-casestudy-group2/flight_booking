@@ -60,7 +60,7 @@
 <!--                    </div>-->
                     <div class="mb-3">
                         <label class="form-label" for="departureAirportId">Điểm Khởi Hành</label>
-                        <select name="departureAirportId" id="departureAirportId" class="form-select custom-select">
+                        <select name="departureAirportId" id="departureAirportId" class="form-select">
                             <option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.airportName}"></option>
                         </select>
                     </div>
