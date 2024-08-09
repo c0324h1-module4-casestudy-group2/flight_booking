@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -374,11 +374,9 @@
 
 <body>
 <!--Nav-->
-<nav class="navbar navbar-expand-lg navbar-dark position-fixed w-100 z-3" th:fragment="">
+<nav class="navbar navbar-expand-lg navbar-dark position-fixed w-100 z-3">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="https://img.icons8.com/color/48/000000/airplane-mode-on.png" alt="SkyJourney Logo" width="40"
-                 height="40">
+        <a class="navbar-brand" href="/home">
             SkyJourney
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -388,34 +386,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i> Trang
-                        Chủ</a>
+                    <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home me-1"></i><span> Trang Chủ</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-plane-departure"></i> Giới thiệu</a>
+                    <a class="nav-link" href="/introduction"><i class="fas fa-plane-departure me-1"></i><span> Giới thiệu</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#check-booking"><i class="fas fa-search"></i> Tra Cứu</a>
-                    <!-- Sửa biểu tượng -->
+                    <a class="nav-link" href="#check-booking"><i class="fas fa-search me-1"></i><span> Tra Cứu</span></a>
+                </li>
+                <li class="nav-item failed">
+                    <a class="nav-link" href="#"><i class="fas fa-headset me-1"></i><span> Hỗ Trợ</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-concierge-bell"></i> Dịch Vụ
+                        <i class="fa-solid fa-user me-1"></i><span> Người dùng</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-suitcase-rolling"></i> Hành Lý</a>
+                        <li><a class="dropdown-item" href="/booking-history"><i class="fa-solid fa-clock-rotate-left me-1"></i><span> Lịch sử giao dịch</span></a>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-utensils"></i> Đặt Suất Ăn</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-chair"></i> Chọn Chỗ Ngồi</a></li>
+                        <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i><span> Đăng Xuất</span></a></li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-headset"></i> Hỗ Trợ</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <a class="nav-link btn-login" href="/login"><i class="fas fa-user"></i> Đăng Nhập</a>
                 </li>
                 <li class="nav-item dropdown language-dropdown">
@@ -427,7 +422,7 @@
                         <li><a class="dropdown-item language-item" href="#"><img
                                 src="https://img.icons8.com/color/48/000000/vietnam-circular.png"
                                 alt="Tiếng Việt"> Tiếng Việt</a></li>
-                        <li><a class="dropdown-item language-item" href="#"><img
+                        <li class="failed"><a class="dropdown-item language-item" href="#"><img
                                 src="https://img.icons8.com/color/48/000000/great-britain-circular.png"
                                 alt="English"> English</a></li>
                     </ul>
