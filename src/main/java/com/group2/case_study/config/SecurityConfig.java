@@ -1,5 +1,6 @@
 package com.group2.case_study.config;
 
+import com.group2.case_study.controllers.CustomAuthenticationSuccessHandler;
 import com.group2.case_study.services.impl.UserInforDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class SecurityConfig {
     @Autowired
     private UserInforDetailService userDetailsService;
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -41,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login", "/logoutSuccessful", "/register","/ticket/**", "/css/**", "/js/**").permitAll()
-                                .requestMatchers("/student/create", "/logout").authenticated()
+                                .requestMatchers( "/logout").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
@@ -52,6 +56,7 @@ public class SecurityConfig {
                                 .failureUrl("/login?error=true")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/home", true)
+                                .successHandler(customAuthenticationSuccessHandler)
                 )
                 .logout(logout ->
                         logout.deleteCookies("JSESSIONID")
